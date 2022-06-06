@@ -16,6 +16,7 @@
         <parameter key="repository_entry" value="../../Data/wordlist_to_data"/>
       </operator>
       <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="313" y="85">
+        <parameter key="excel_file" value="C:/Users/Daniel/Dropbox/Data_Science_2021/2022_05_BI_and_Big_Data_Design_Workshop/Projekt/Tableau_Handover/test/fgnfgn.xlsx"/>
         <parameter key="file_format" value="xlsx"/>
         <enumeration key="sheet_names">
           <parameter key="sheet_name_element" value="Handover_test"/>
@@ -25,14 +26,11 @@
         <parameter key="number_format" value="#.0"/>
         <parameter key="encoding" value="SYSTEM"/>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="514" y="85">
-        <parameter key="repository_entry" value="../../Data/Handover_test/Handover_tableau"/>
-      </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Write Excel" to_port="input"/>
-      <connect from_op="Write Excel" from_port="file" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="277" y="277">Test to write data in a excel and keep it in tableau up to date via live data connection</description>
     </process>
   </operator>
 </process>
