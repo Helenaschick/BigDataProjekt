@@ -96,9 +96,13 @@
       <connect from_port="input 1" to_op="Process Documents from Files" to_port="word list"/>
       <connect from_op="Process Documents from Files" from_port="example set" to_op="Store (2)" to_port="input"/>
       <connect from_op="Process Documents from Files" from_port="word list" to_op="Store" to_port="input"/>
+      <connect from_op="Store (2)" from_port="through" to_port="result 1"/>
+      <connect from_op="Store" from_port="through" to_port="result 2"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="source_input 2" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
     </process>
   </operator>
 </process>
