@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="9.10.001">
+<?xml version="1.0" encoding="UTF-8"?><process version="9.10.008">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="9.10.001" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="9.10.008" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -14,14 +14,14 @@
     <process expanded="true">
       <operator activated="true" class="text:process_document_from_file" compatibility="9.4.000" expanded="true" height="82" name="Process Documents from Files" width="90" x="179" y="34">
         <list key="text_directories">
-          <parameter key="chinese" value="/Users/viktoria/Desktop/Training_Data/chinese"/>
-          <parameter key="korean" value="/Users/viktoria/Desktop/Training_Data/korean"/>
-          <parameter key="italian" value="/Users/viktoria/Desktop/Training_Data/italian"/>
-          <parameter key="thai" value="/Users/viktoria/Desktop/Training_Data/thai"/>
-          <parameter key="iberic" value="/Users/viktoria/Desktop/Training_Data/iberic"/>
-          <parameter key="vietnamese" value="/Users/viktoria/Desktop/Training_Data/vietnamese"/>
-          <parameter key="french" value="/Users/viktoria/Desktop/Training_Data/french"/>
-          <parameter key="greek" value="/Users/viktoria/Desktop/Training_Data/greek"/>
+          <parameter key="chinese" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/chinese"/>
+          <parameter key="korean" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/korean"/>
+          <parameter key="italian" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/italian"/>
+          <parameter key="thai" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/thai"/>
+          <parameter key="iberic" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/iberic"/>
+          <parameter key="vietnamese" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/vietnamese"/>
+          <parameter key="french" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/french"/>
+          <parameter key="greek" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/greek"/>
         </list>
         <parameter key="file_pattern" value="*"/>
         <parameter key="extract_text_only" value="true"/>
@@ -40,9 +40,9 @@
         <parameter key="datamanagement" value="double_sparse_array"/>
         <parameter key="data_management" value="auto"/>
         <process expanded="true">
-          <operator activated="true" class="open_file" compatibility="9.10.001" expanded="true" height="68" name="Open File" width="90" x="916" y="187">
+          <operator activated="true" class="open_file" compatibility="9.10.008" expanded="true" height="68" name="Open File" width="90" x="916" y="187">
             <parameter key="resource_type" value="file"/>
-            <parameter key="filename" value="/Users/viktoria/Downloads/stop_words_new.txt"/>
+            <parameter key="filename" value="/Users/helena.schick/Documents/BigData/Data/stop_words2.txt"/>
           </operator>
           <operator activated="true" class="text:tokenize" compatibility="9.4.000" expanded="true" height="68" name="Tokenize" width="90" x="112" y="34">
             <parameter key="mode" value="non letters"/>
@@ -91,11 +91,11 @@
           <portSpacing port="sink_document 2" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store (2)" width="90" x="447" y="136">
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (2)" width="90" x="447" y="136">
         <parameter key="repository_entry" value="exa_2_grams"/>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store" width="90" x="447" y="34">
-        <parameter key="repository_entry" value="../data/2grams_data"/>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="447" y="34">
+        <parameter key="repository_entry" value="../Data/Training_Data/Training_Data/2grams_data"/>
       </operator>
       <connect from_port="input 1" to_op="Process Documents from Files" to_port="word list"/>
       <connect from_op="Process Documents from Files" from_port="example set" to_op="Store (2)" to_port="input"/>

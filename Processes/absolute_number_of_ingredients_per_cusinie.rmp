@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="9.10.001">
+<?xml version="1.0" encoding="UTF-8"?><process version="9.10.008">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="9.10.001" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="9.10.008" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -12,10 +12,10 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve wordlist_to_data" width="90" x="112" y="34">
-        <parameter key="repository_entry" value="../data/test/wordlist_to_data"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data" width="90" x="112" y="34">
+        <parameter key="repository_entry" value="../Data/wordlist_to_data"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Select Attributes" width="90" x="246" y="34">
+      <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes" width="90" x="246" y="34">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="in class (chinese)|word"/>
@@ -29,7 +29,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples" width="90" x="380" y="34">
+      <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples" width="90" x="380" y="34">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -39,7 +39,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="9.10.001" expanded="true" height="82" name="Aggregate" width="90" x="514" y="34">
+      <operator activated="true" class="aggregate" compatibility="9.10.008" expanded="true" height="82" name="Aggregate" width="90" x="514" y="34">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -62,10 +62,10 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve wordlist_to_data (2)" width="90" x="112" y="187">
-        <parameter key="repository_entry" value="../data/test/wordlist_to_data"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (2)" width="90" x="112" y="187">
+        <parameter key="repository_entry" value="../Data/wordlist_to_data"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Select Attributes (2)" width="90" x="246" y="187">
+      <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (2)" width="90" x="246" y="187">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="word|in class (french)"/>
@@ -79,7 +79,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (2)" width="90" x="380" y="187">
+      <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples (2)" width="90" x="380" y="187">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -89,7 +89,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="9.10.001" expanded="true" height="82" name="Aggregate (2)" width="90" x="514" y="187">
+      <operator activated="true" class="aggregate" compatibility="9.10.008" expanded="true" height="82" name="Aggregate (2)" width="90" x="514" y="187">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -112,10 +112,10 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve wordlist_to_data (3)" width="90" x="112" y="340">
-        <parameter key="repository_entry" value="../data/test/wordlist_to_data"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (3)" width="90" x="112" y="340">
+        <parameter key="repository_entry" value="../Data/wordlist_to_data"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Select Attributes (3)" width="90" x="246" y="340">
+      <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (3)" width="90" x="246" y="340">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="word|in class (greek)"/>
@@ -129,7 +129,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (3)" width="90" x="380" y="340">
+      <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples (3)" width="90" x="380" y="340">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -139,7 +139,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="9.10.001" expanded="true" height="82" name="Aggregate (3)" width="90" x="514" y="340">
+      <operator activated="true" class="aggregate" compatibility="9.10.008" expanded="true" height="82" name="Aggregate (3)" width="90" x="514" y="340">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -162,10 +162,10 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve wordlist_to_data (4)" width="90" x="112" y="493">
-        <parameter key="repository_entry" value="../data/test/wordlist_to_data"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (4)" width="90" x="112" y="493">
+        <parameter key="repository_entry" value="../Data/wordlist_to_data"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Select Attributes (4)" width="90" x="246" y="493">
+      <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (4)" width="90" x="246" y="493">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="word|in class (iberic)"/>
@@ -179,7 +179,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (4)" width="90" x="380" y="493">
+      <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples (4)" width="90" x="380" y="493">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -189,7 +189,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="9.10.001" expanded="true" height="82" name="Aggregate (4)" width="90" x="514" y="493">
+      <operator activated="true" class="aggregate" compatibility="9.10.008" expanded="true" height="82" name="Aggregate (4)" width="90" x="514" y="493">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -212,10 +212,10 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve wordlist_to_data (5)" width="90" x="112" y="646">
-        <parameter key="repository_entry" value="../data/test/wordlist_to_data"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (5)" width="90" x="112" y="646">
+        <parameter key="repository_entry" value="../Data/wordlist_to_data"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Select Attributes (5)" width="90" x="246" y="646">
+      <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (5)" width="90" x="246" y="646">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="word|in class (italian)"/>
@@ -229,7 +229,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (5)" width="90" x="380" y="646">
+      <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples (5)" width="90" x="380" y="646">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -239,7 +239,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="9.10.001" expanded="true" height="82" name="Aggregate (5)" width="90" x="514" y="646">
+      <operator activated="true" class="aggregate" compatibility="9.10.008" expanded="true" height="82" name="Aggregate (5)" width="90" x="514" y="646">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -262,10 +262,10 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve wordlist_to_data (6)" width="90" x="112" y="799">
-        <parameter key="repository_entry" value="../data/test/wordlist_to_data"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (6)" width="90" x="112" y="799">
+        <parameter key="repository_entry" value="../Data/wordlist_to_data"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Select Attributes (6)" width="90" x="246" y="799">
+      <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (6)" width="90" x="246" y="799">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="word|in class (korean)"/>
@@ -279,7 +279,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (6)" width="90" x="380" y="799">
+      <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples (6)" width="90" x="380" y="799">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -289,7 +289,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="9.10.001" expanded="true" height="82" name="Aggregate (6)" width="90" x="514" y="799">
+      <operator activated="true" class="aggregate" compatibility="9.10.008" expanded="true" height="82" name="Aggregate (6)" width="90" x="514" y="799">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -312,10 +312,10 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve wordlist_to_data (7)" width="90" x="112" y="952">
-        <parameter key="repository_entry" value="../data/test/wordlist_to_data"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (7)" width="90" x="112" y="952">
+        <parameter key="repository_entry" value="../Data/wordlist_to_data"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Select Attributes (7)" width="90" x="246" y="952">
+      <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (7)" width="90" x="246" y="952">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="word|in class (thai)"/>
@@ -329,7 +329,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (7)" width="90" x="380" y="952">
+      <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples (7)" width="90" x="380" y="952">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -339,7 +339,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="9.10.001" expanded="true" height="82" name="Aggregate (7)" width="90" x="514" y="901">
+      <operator activated="true" class="aggregate" compatibility="9.10.008" expanded="true" height="82" name="Aggregate (7)" width="90" x="514" y="901">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -362,10 +362,10 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve wordlist_to_data (8)" width="90" x="112" y="1105">
-        <parameter key="repository_entry" value="../data/test/wordlist_to_data"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (8)" width="90" x="112" y="1105">
+        <parameter key="repository_entry" value="../Data/wordlist_to_data"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Select Attributes (8)" width="90" x="246" y="1105">
+      <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (8)" width="90" x="246" y="1105">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="word|in class (vietnamese)"/>
@@ -379,7 +379,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (8)" width="90" x="380" y="1105">
+      <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples (8)" width="90" x="380" y="1105">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -389,7 +389,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="9.10.001" expanded="true" height="82" name="Aggregate (8)" width="90" x="514" y="1105">
+      <operator activated="true" class="aggregate" compatibility="9.10.008" expanded="true" height="82" name="Aggregate (8)" width="90" x="514" y="1105">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>

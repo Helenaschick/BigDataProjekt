@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="9.10.001">
+<?xml version="1.0" encoding="UTF-8"?><process version="9.10.008">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="9.10.001" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="9.10.008" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -12,10 +12,10 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve wordlist_to_data" width="90" x="112" y="34">
-        <parameter key="repository_entry" value="../data/test/wordlist_to_data"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data" width="90" x="112" y="34">
+        <parameter key="repository_entry" value="../Data/wordlist_to_data"/>
       </operator>
-      <operator activated="true" class="generate_attributes" compatibility="9.10.001" expanded="true" height="82" name="Generate Attributes" width="90" x="313" y="34">
+      <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes" width="90" x="313" y="34">
         <list key="function_descriptions">
           <parameter key="relativ_count_chinese" value="[in class (chinese)] / total"/>
           <parameter key="relativ_count_thai" value="[in class (thai)] / total"/>
@@ -28,7 +28,7 @@
         </list>
         <parameter key="keep_all" value="true"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Select Attributes" width="90" x="581" y="34">
+      <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes" width="90" x="581" y="34">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="relativ_count_chinese|relativ_count_greek|relativ_count_iberic|relativ_count_italian|relativ_count_korean|relativ_count_thai|relativ_count_vietnamese|word"/>
