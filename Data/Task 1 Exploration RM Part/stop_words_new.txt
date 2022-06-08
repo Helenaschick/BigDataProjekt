@@ -665,7 +665,6 @@ para
 pappa
 paper
 panic
-palm
 palette
 palate
 pair
@@ -987,7 +986,6 @@ granny
 grange
 gram
 grainy
-grain
 grace
 grab
 gourmet
@@ -2941,8 +2939,6 @@ bars
 barron
 barrels
 barnacles
-barbeque
-barbecue
 barbara
 banking
 banh
