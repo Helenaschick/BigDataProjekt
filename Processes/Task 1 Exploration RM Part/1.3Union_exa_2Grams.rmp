@@ -12,10 +12,10 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve (3)" width="90" x="112" y="34">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_train" width="90" x="112" y="34">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_2_grams_train"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve (4)" width="90" x="112" y="136">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_test" width="90" x="112" y="136">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_2_grams_test"/>
       </operator>
       <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (2)" width="90" x="246" y="85"/>
@@ -34,14 +34,14 @@
         <parameter key="include_special_attributes" value="false"/>
         <parameter key="treat_missing_values_as_duplicates" value="false"/>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="514" y="85">
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store exa_2grams" width="90" x="514" y="85">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_2grams"/>
       </operator>
-      <connect from_op="Retrieve (3)" from_port="output" to_op="Union (2)" to_port="example set 1"/>
-      <connect from_op="Retrieve (4)" from_port="output" to_op="Union (2)" to_port="example set 2"/>
+      <connect from_op="Retrieve exa_train" from_port="output" to_op="Union (2)" to_port="example set 1"/>
+      <connect from_op="Retrieve exa_test" from_port="output" to_op="Union (2)" to_port="example set 2"/>
       <connect from_op="Union (2)" from_port="union" to_op="Remove Duplicates" to_port="example set input"/>
-      <connect from_op="Remove Duplicates" from_port="example set output" to_op="Store" to_port="input"/>
-      <connect from_op="Store" from_port="through" to_port="result 1"/>
+      <connect from_op="Remove Duplicates" from_port="example set output" to_op="Store exa_2grams" to_port="input"/>
+      <connect from_op="Store exa_2grams" from_port="through" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>

@@ -12,15 +12,15 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve 2grams" width="90" x="112" y="34">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve 2grams_test" width="90" x="112" y="34">
         <parameter key="repository_entry" value="../../Data/Test_Data/2grams_data_test"/>
       </operator>
       <operator activated="true" class="text:wordlist_to_data" compatibility="9.4.000" expanded="true" height="82" name="WordList to Data" width="90" x="313" y="34"/>
-      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="581" y="34">
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store wordlist_test" width="90" x="581" y="34">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_to_data_2grams_test"/>
       </operator>
-      <connect from_op="Retrieve 2grams" from_port="output" to_op="WordList to Data" to_port="word list"/>
-      <connect from_op="WordList to Data" from_port="example set" to_op="Store" to_port="input"/>
+      <connect from_op="Retrieve 2grams_test" from_port="output" to_op="WordList to Data" to_port="word list"/>
+      <connect from_op="WordList to Data" from_port="example set" to_op="Store wordlist_test" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
     </process>

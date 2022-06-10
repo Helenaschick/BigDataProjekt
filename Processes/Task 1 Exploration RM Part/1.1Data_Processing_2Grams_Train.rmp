@@ -89,17 +89,18 @@
           <portSpacing port="source_document" spacing="0"/>
           <portSpacing port="sink_document 1" spacing="0"/>
           <portSpacing port="sink_document 2" spacing="0"/>
+          <description align="center" color="yellow" colored="false" height="145" resized="false" width="180" x="1082" y="134">Stopword Liste manuell erststellt, nach erstem Lauf :&lt;br/&gt;- alle Zutaten entfernt&lt;br/&gt;- Zutaten, die in allen Rezepten h&amp;#228;ufig vorkommen hinzugef&amp;#252;gt (date, water, salt, pepper)</description>
         </process>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (2)" width="90" x="447" y="136">
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store exa" width="90" x="447" y="136">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_2_grams_train"/>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="447" y="34">
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store wordlist" width="90" x="447" y="34">
         <parameter key="repository_entry" value="../../Data/Training_Data/Training_Data/2grams_data_train"/>
       </operator>
       <connect from_port="input 1" to_op="Process Documents from Files" to_port="word list"/>
-      <connect from_op="Process Documents from Files" from_port="example set" to_op="Store (2)" to_port="input"/>
-      <connect from_op="Process Documents from Files" from_port="word list" to_op="Store" to_port="input"/>
+      <connect from_op="Process Documents from Files" from_port="example set" to_op="Store exa" to_port="input"/>
+      <connect from_op="Process Documents from Files" from_port="word list" to_op="Store wordlist" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="source_input 2" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>

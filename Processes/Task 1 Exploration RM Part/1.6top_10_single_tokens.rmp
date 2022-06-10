@@ -12,8 +12,8 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="../../Data/wordlist_single_tokens"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_single_tokens" width="90" x="45" y="34">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_single_tokens"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes" width="90" x="179" y="34">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -39,8 +39,8 @@
         <parameter key="last_example" value="10"/>
         <parameter key="invert_filter" value="false"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (2)" width="90" x="45" y="136">
-        <parameter key="repository_entry" value="../../Data/wordlist_single_tokens"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_single_tokens (2)" width="90" x="45" y="136">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_single_tokens"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (2)" width="90" x="179" y="136">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -66,8 +66,8 @@
         <parameter key="last_example" value="10"/>
         <parameter key="invert_filter" value="false"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (3)" width="90" x="45" y="238">
-        <parameter key="repository_entry" value="../../Data/wordlist_single_tokens"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_single_tokens (3)" width="90" x="45" y="238">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_single_tokens"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (3)" width="90" x="179" y="238">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -93,8 +93,8 @@
         <parameter key="last_example" value="10"/>
         <parameter key="invert_filter" value="false"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (4)" width="90" x="45" y="340">
-        <parameter key="repository_entry" value="../../Data/wordlist_single_tokens"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_single_tokens (4)" width="90" x="45" y="340">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_single_tokens"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (4)" width="90" x="179" y="340">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -120,8 +120,8 @@
         <parameter key="last_example" value="10"/>
         <parameter key="invert_filter" value="false"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (5)" width="90" x="45" y="442">
-        <parameter key="repository_entry" value="../../Data/wordlist_single_tokens"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_single_tokens (5)" width="90" x="45" y="442">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_single_tokens"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (5)" width="90" x="179" y="442">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -147,8 +147,8 @@
         <parameter key="last_example" value="10"/>
         <parameter key="invert_filter" value="false"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (6)" width="90" x="45" y="544">
-        <parameter key="repository_entry" value="../../Data/wordlist_single_tokens"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_single_tokens (6)" width="90" x="45" y="544">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_single_tokens"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (6)" width="90" x="179" y="544">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -174,8 +174,8 @@
         <parameter key="last_example" value="10"/>
         <parameter key="invert_filter" value="false"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (7)" width="90" x="45" y="646">
-        <parameter key="repository_entry" value="../../Data/wordlist_single_tokens"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_single_tokens (7)" width="90" x="45" y="646">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_single_tokens"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (7)" width="90" x="179" y="646">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -201,8 +201,8 @@
         <parameter key="last_example" value="10"/>
         <parameter key="invert_filter" value="false"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (8)" width="90" x="45" y="748">
-        <parameter key="repository_entry" value="../../Data/wordlist_single_tokens"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_single_tokens (8)" width="90" x="45" y="748">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_single_tokens"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (8)" width="90" x="179" y="748">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -228,8 +228,8 @@
         <parameter key="last_example" value="10"/>
         <parameter key="invert_filter" value="false"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (9)" width="90" x="45" y="850">
-        <parameter key="repository_entry" value="../../Data/wordlist_single_tokens"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_single_tokens (9)" width="90" x="45" y="850">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_single_tokens"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="9.10.008" expanded="true" height="82" name="Select Attributes (9)" width="90" x="179" y="850">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -318,39 +318,39 @@
         <parameter key="from_attribute" value=""/>
         <parameter key="to_attribute" value=""/>
       </operator>
-      <connect from_op="Retrieve wordlist_to_data" from_port="output" to_op="Select Attributes" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_single_tokens" from_port="output" to_op="Select Attributes" to_port="example set input"/>
       <connect from_op="Select Attributes" from_port="example set output" to_op="Sort" to_port="example set input"/>
       <connect from_op="Sort" from_port="example set output" to_op="Filter Example Range" to_port="example set input"/>
       <connect from_op="Filter Example Range" from_port="example set output" to_op="Rename" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (2)" from_port="output" to_op="Select Attributes (2)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_single_tokens (2)" from_port="output" to_op="Select Attributes (2)" to_port="example set input"/>
       <connect from_op="Select Attributes (2)" from_port="example set output" to_op="Sort (2)" to_port="example set input"/>
       <connect from_op="Sort (2)" from_port="example set output" to_op="Filter Example Range (2)" to_port="example set input"/>
       <connect from_op="Filter Example Range (2)" from_port="example set output" to_op="Rename (2)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (3)" from_port="output" to_op="Select Attributes (3)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_single_tokens (3)" from_port="output" to_op="Select Attributes (3)" to_port="example set input"/>
       <connect from_op="Select Attributes (3)" from_port="example set output" to_op="Sort (3)" to_port="example set input"/>
       <connect from_op="Sort (3)" from_port="example set output" to_op="Filter Example Range (3)" to_port="example set input"/>
       <connect from_op="Filter Example Range (3)" from_port="example set output" to_op="Rename (3)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (4)" from_port="output" to_op="Select Attributes (4)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_single_tokens (4)" from_port="output" to_op="Select Attributes (4)" to_port="example set input"/>
       <connect from_op="Select Attributes (4)" from_port="example set output" to_op="Sort (4)" to_port="example set input"/>
       <connect from_op="Sort (4)" from_port="example set output" to_op="Filter Example Range (4)" to_port="example set input"/>
       <connect from_op="Filter Example Range (4)" from_port="example set output" to_op="Rename (4)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (5)" from_port="output" to_op="Select Attributes (5)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_single_tokens (5)" from_port="output" to_op="Select Attributes (5)" to_port="example set input"/>
       <connect from_op="Select Attributes (5)" from_port="example set output" to_op="Sort (5)" to_port="example set input"/>
       <connect from_op="Sort (5)" from_port="example set output" to_op="Filter Example Range (5)" to_port="example set input"/>
       <connect from_op="Filter Example Range (5)" from_port="example set output" to_op="Rename (5)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (6)" from_port="output" to_op="Select Attributes (6)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_single_tokens (6)" from_port="output" to_op="Select Attributes (6)" to_port="example set input"/>
       <connect from_op="Select Attributes (6)" from_port="example set output" to_op="Sort (6)" to_port="example set input"/>
       <connect from_op="Sort (6)" from_port="example set output" to_op="Filter Example Range (6)" to_port="example set input"/>
       <connect from_op="Filter Example Range (6)" from_port="example set output" to_op="Rename (6)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (7)" from_port="output" to_op="Select Attributes (7)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_single_tokens (7)" from_port="output" to_op="Select Attributes (7)" to_port="example set input"/>
       <connect from_op="Select Attributes (7)" from_port="example set output" to_op="Sort (7)" to_port="example set input"/>
       <connect from_op="Sort (7)" from_port="example set output" to_op="Filter Example Range (7)" to_port="example set input"/>
       <connect from_op="Filter Example Range (7)" from_port="example set output" to_op="Rename (7)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (8)" from_port="output" to_op="Select Attributes (8)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_single_tokens (8)" from_port="output" to_op="Select Attributes (8)" to_port="example set input"/>
       <connect from_op="Select Attributes (8)" from_port="example set output" to_op="Sort (8)" to_port="example set input"/>
       <connect from_op="Sort (8)" from_port="example set output" to_op="Filter Example Range (8)" to_port="example set input"/>
       <connect from_op="Filter Example Range (8)" from_port="example set output" to_op="Rename (8)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (9)" from_port="output" to_op="Select Attributes (9)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_single_tokens (9)" from_port="output" to_op="Select Attributes (9)" to_port="example set input"/>
       <connect from_op="Select Attributes (9)" from_port="example set output" to_op="Rename (9)" to_port="example set input"/>
       <connect from_op="Rename (9)" from_port="example set output" to_op="Sort (9)" to_port="example set input"/>
       <connect from_op="Sort (9)" from_port="example set output" to_op="Filter Example Range (9)" to_port="example set input"/>

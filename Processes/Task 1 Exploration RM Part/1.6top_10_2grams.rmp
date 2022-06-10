@@ -12,7 +12,7 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data" width="90" x="45" y="136">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_2grams" width="90" x="45" y="136">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_2grams"/>
       </operator>
       <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples" width="90" x="179" y="136">
@@ -56,19 +56,19 @@
         <parameter key="from_attribute" value=""/>
         <parameter key="to_attribute" value=""/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (2)" width="90" x="45" y="238">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_2grams (2)" width="90" x="45" y="238">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_2grams"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (3)" width="90" x="45" y="340">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_2grams" width="90" x="45" y="340">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_2grams"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (4)" width="90" x="45" y="442">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_2grams (2)" width="90" x="45" y="442">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_2grams"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (5)" width="90" x="45" y="544">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_2grams (3)" width="90" x="45" y="544">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_2grams"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (6)" width="90" x="45" y="646">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_2grams (4)" width="90" x="45" y="646">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_2grams"/>
       </operator>
       <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples (6)" width="90" x="179" y="646">
@@ -112,13 +112,13 @@
         <parameter key="from_attribute" value=""/>
         <parameter key="to_attribute" value=""/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (7)" width="90" x="45" y="748">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_2grams (5)" width="90" x="45" y="748">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_2grams"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (8)" width="90" x="45" y="850">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_2grams (6)" width="90" x="45" y="850">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_2grams"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data (9)" width="90" x="45" y="952">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_2grams (7)" width="90" x="45" y="952">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_2grams"/>
       </operator>
       <operator activated="true" class="filter_examples" compatibility="9.10.008" expanded="true" height="103" name="Filter Examples (2)" width="90" x="179" y="238">
@@ -408,25 +408,25 @@
         <parameter key="from_attribute" value=""/>
         <parameter key="to_attribute" value=""/>
       </operator>
-      <connect from_op="Retrieve wordlist_to_data" from_port="output" to_op="Filter Examples" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_2grams" from_port="output" to_op="Filter Examples" to_port="example set input"/>
       <connect from_op="Filter Examples" from_port="example set output" to_op="Select Attributes" to_port="example set input"/>
       <connect from_op="Select Attributes" from_port="example set output" to_op="Sort" to_port="example set input"/>
       <connect from_op="Sort" from_port="example set output" to_op="Filter Example Range" to_port="example set input"/>
       <connect from_op="Filter Example Range" from_port="example set output" to_op="Rename" to_port="example set input"/>
       <connect from_op="Rename" from_port="example set output" to_port="result 1"/>
-      <connect from_op="Retrieve wordlist_to_data (2)" from_port="output" to_op="Filter Examples (2)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (3)" from_port="output" to_op="Filter Examples (3)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (4)" from_port="output" to_op="Filter Examples (4)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (5)" from_port="output" to_op="Filter Examples (5)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (6)" from_port="output" to_op="Filter Examples (6)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_2grams (2)" from_port="output" to_op="Filter Examples (2)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_to_2grams" from_port="output" to_op="Filter Examples (3)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_to_2grams (2)" from_port="output" to_op="Filter Examples (4)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_2grams (3)" from_port="output" to_op="Filter Examples (5)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_2grams (4)" from_port="output" to_op="Filter Examples (6)" to_port="example set input"/>
       <connect from_op="Filter Examples (6)" from_port="example set output" to_op="Select Attributes (6)" to_port="example set input"/>
       <connect from_op="Select Attributes (6)" from_port="example set output" to_op="Sort (6)" to_port="example set input"/>
       <connect from_op="Sort (6)" from_port="example set output" to_op="Filter Example Range (6)" to_port="example set input"/>
       <connect from_op="Filter Example Range (6)" from_port="example set output" to_op="Rename (6)" to_port="example set input"/>
       <connect from_op="Rename (6)" from_port="example set output" to_port="result 6"/>
-      <connect from_op="Retrieve wordlist_to_data (7)" from_port="output" to_op="Filter Examples (7)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (8)" from_port="output" to_op="Filter Examples (8)" to_port="example set input"/>
-      <connect from_op="Retrieve wordlist_to_data (9)" from_port="output" to_op="Filter Examples (9)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_2grams (5)" from_port="output" to_op="Filter Examples (7)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_2grams (6)" from_port="output" to_op="Filter Examples (8)" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_2grams (7)" from_port="output" to_op="Filter Examples (9)" to_port="example set input"/>
       <connect from_op="Filter Examples (2)" from_port="example set output" to_op="Select Attributes (2)" to_port="example set input"/>
       <connect from_op="Select Attributes (2)" from_port="example set output" to_op="Sort (2)" to_port="example set input"/>
       <connect from_op="Sort (2)" from_port="example set output" to_op="Filter Example Range (2)" to_port="example set input"/>

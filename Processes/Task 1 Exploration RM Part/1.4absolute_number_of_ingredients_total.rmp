@@ -12,7 +12,7 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_to_data" width="90" x="112" y="85">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve wordlist_single_tokens" width="90" x="112" y="85">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_single_tokens"/>
       </operator>
       <operator activated="true" class="declare_missing_value" compatibility="9.10.008" expanded="true" height="82" name="Declare Missing Value" width="90" x="246" y="85">
@@ -78,7 +78,7 @@
         <parameter key="from_attribute" value=""/>
         <parameter key="to_attribute" value=""/>
       </operator>
-      <connect from_op="Retrieve wordlist_to_data" from_port="output" to_op="Declare Missing Value" to_port="example set input"/>
+      <connect from_op="Retrieve wordlist_single_tokens" from_port="output" to_op="Declare Missing Value" to_port="example set input"/>
       <connect from_op="Declare Missing Value" from_port="example set output" to_op="Aggregate" to_port="example set input"/>
       <connect from_op="Aggregate" from_port="example set output" to_op="Rename" to_port="example set input"/>
       <connect from_op="Rename" from_port="example set output" to_port="result 1"/>

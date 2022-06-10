@@ -217,7 +217,7 @@
         <parameter key="trim_item_names" value="true"/>
         <parameter key="min_requirement" value="frequency"/>
         <parameter key="min_support" value="0.25"/>
-        <parameter key="min_frequency" value="10"/>
+        <parameter key="min_frequency" value="2"/>
         <parameter key="min_items_per_itemset" value="2"/>
         <parameter key="max_items_per_itemset" value="0"/>
         <parameter key="max_number_of_itemsets" value="10"/>
@@ -457,7 +457,7 @@
         <parameter key="laplace_k" value="1.0"/>
       </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_2_grams (7)" width="90" x="45" y="1054">
-        <parameter key="repository_entry" value="../../Data/exa_2grams"/>
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_2grams"/>
       </operator>
       <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role (7)" width="90" x="179" y="1054">
         <parameter key="attribute_name" value="label"/>
@@ -531,7 +531,7 @@
         <parameter key="laplace_k" value="1.0"/>
       </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_2_grams (8)" width="90" x="45" y="1207">
-        <parameter key="repository_entry" value="../../Data/exa_2grams"/>
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_2grams"/>
       </operator>
       <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role (8)" width="90" x="179" y="1207">
         <parameter key="attribute_name" value="label"/>
