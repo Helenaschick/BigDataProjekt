@@ -100,6 +100,7 @@
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="source_input 2" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="50" resized="true" width="176" x="142" y="157">Ben&amp;#246;tigt knapp 10 min</description>
     </process>
   </operator>
 </process>
