@@ -140,8 +140,32 @@
         <parameter key="from_attribute" value=""/>
         <parameter key="to_attribute" value=""/>
       </operator>
-      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union" width="90" x="1117" y="187"/>
-      <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="1251" y="187">
+      <operator activated="false" class="concurrency:join" compatibility="9.10.008" expanded="true" height="82" name="Join" width="90" x="581" y="544">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="left"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="Cuisine" value="Cuisine"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union" width="90" x="1184" y="187"/>
+      <operator activated="true" class="remove_duplicates" compatibility="9.10.008" expanded="true" height="103" name="Remove Duplicates" width="90" x="1318" y="187">
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="treat_missing_values_as_duplicates" value="false"/>
+      </operator>
+      <operator activated="false" class="write_excel" compatibility="9.10.008" expanded="true" height="82" name="Write Excel" width="90" x="1184" y="442">
         <parameter key="excel_file" value="G:/Meine Ablage/ingridients.xlsx"/>
         <parameter key="file_format" value="xlsx"/>
         <enumeration key="sheet_names">
@@ -164,9 +188,11 @@
       <connect from_op="Select Attributes (6)" from_port="example set output" to_op="Replace (3)" to_port="example set input"/>
       <connect from_op="Replace (3)" from_port="example set output" to_op="Rename (2)" to_port="example set input"/>
       <connect from_op="Rename (2)" from_port="example set output" to_op="Union" to_port="example set 2"/>
-      <connect from_op="Union" from_port="union" to_op="Write Excel" to_port="input"/>
+      <connect from_op="Union" from_port="union" to_op="Remove Duplicates" to_port="example set input"/>
+      <connect from_op="Remove Duplicates" from_port="example set output" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
     </process>
   </operator>
 </process>
