@@ -52,7 +52,7 @@
         <parameter key="include_special_attributes" value="true"/>
         <description align="center" color="transparent" colored="false" width="126">Remove missing values</description>
       </operator>
-      <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="68" name="Multiply" width="90" x="782" y="289"/>
+      <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Multiply" width="90" x="782" y="289"/>
       <operator activated="false" class="generate_tfidf" compatibility="9.10.008" expanded="true" height="82" name="Generate TFIDF" width="90" x="380" y="799">
         <parameter key="calculate_term_frequencies" value="true"/>
       </operator>
@@ -136,6 +136,20 @@
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve (2)" width="90" x="45" y="85">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_to_data_2grams_train"/>
       </operator>
+      <operator activated="true" class="de_pivot" compatibility="9.10.008" expanded="true" height="82" name="De-Pivot" width="90" x="380" y="85">
+        <list key="attribute_name">
+          <parameter key="Amount of ingridients (Single tokens)" value="in class.*"/>
+        </list>
+        <parameter key="index_attribute" value="Cuisine"/>
+        <parameter key="create_nominal_index" value="true"/>
+        <parameter key="keep_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role (2)" width="90" x="581" y="85">
+        <parameter key="attribute_name" value="Cuisine"/>
+        <parameter key="target_role" value="label"/>
+        <list key="set_additional_roles"/>
+        <description align="center" color="transparent" colored="false" width="126">Set country as label</description>
+      </operator>
       <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation" width="90" x="983" y="34">
         <parameter key="split_on_batch_attribute" value="false"/>
         <parameter key="leave_one_out" value="false"/>
@@ -217,8 +231,11 @@
       <connect from_op="Set Role" from_port="example set output" to_op="Select Attributes" to_port="example set input"/>
       <connect from_op="Select Attributes" from_port="example set output" to_op="Select Attributes (2)" to_port="example set input"/>
       <connect from_op="Select Attributes (2)" from_port="example set output" to_op="Multiply" to_port="input"/>
+      <connect from_op="Multiply" from_port="output 1" to_port="result 2"/>
       <connect from_op="Generate TFIDF" from_port="example set output" to_op="Cross Validation (2)" to_port="example set"/>
-      <connect from_op="Retrieve (2)" from_port="output" to_op="Cross Validation" to_port="example set"/>
+      <connect from_op="Retrieve (2)" from_port="output" to_op="De-Pivot" to_port="example set input"/>
+      <connect from_op="De-Pivot" from_port="example set output" to_op="Set Role (2)" to_port="example set input"/>
+      <connect from_op="Set Role (2)" from_port="example set output" to_op="Cross Validation" to_port="example set"/>
       <connect from_op="Cross Validation" from_port="performance 1" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
