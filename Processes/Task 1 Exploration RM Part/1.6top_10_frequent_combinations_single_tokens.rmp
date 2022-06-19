@@ -86,6 +86,9 @@
         <parameter key="gain_theta" value="2.0"/>
         <parameter key="laplace_k" value="1.0"/>
       </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="916" y="289">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_Chinese"/>
+      </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_single_tokens (2)" width="90" x="45" y="340">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_single_tokens"/>
       </operator>
@@ -159,6 +162,9 @@
         <parameter key="min_criterion_value" value="0.8"/>
         <parameter key="gain_theta" value="2.0"/>
         <parameter key="laplace_k" value="1.0"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (2)" width="90" x="916" y="493">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_French"/>
       </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_single_tokens (3)" width="90" x="45" y="544">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_single_tokens"/>
@@ -234,6 +240,9 @@
         <parameter key="gain_theta" value="2.0"/>
         <parameter key="laplace_k" value="1.0"/>
       </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (3)" width="90" x="916" y="697">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_Greek"/>
+      </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_single_tokens (4)" width="90" x="45" y="748">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_single_tokens"/>
       </operator>
@@ -307,6 +316,9 @@
         <parameter key="min_criterion_value" value="0.8"/>
         <parameter key="gain_theta" value="2.0"/>
         <parameter key="laplace_k" value="1.0"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (4)" width="90" x="916" y="901">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_Iberic"/>
       </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_single_tokens (5)" width="90" x="45" y="952">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_single_tokens"/>
@@ -382,6 +394,9 @@
         <parameter key="gain_theta" value="2.0"/>
         <parameter key="laplace_k" value="1.0"/>
       </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (5)" width="90" x="916" y="1105">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_Italian"/>
+      </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_single_tokens (6)" width="90" x="45" y="1156">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_single_tokens"/>
       </operator>
@@ -455,6 +470,9 @@
         <parameter key="min_criterion_value" value="0.8"/>
         <parameter key="gain_theta" value="2.0"/>
         <parameter key="laplace_k" value="1.0"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (6)" width="90" x="916" y="1309">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_Korean"/>
       </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_single_tokens (7)" width="90" x="45" y="1411">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_single_tokens"/>
@@ -530,6 +548,9 @@
         <parameter key="gain_theta" value="2.0"/>
         <parameter key="laplace_k" value="1.0"/>
       </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (7)" width="90" x="916" y="1564">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_Thai"/>
+      </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_single_tokens (8)" width="90" x="45" y="1615">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_single_tokens"/>
       </operator>
@@ -604,6 +625,9 @@
         <parameter key="gain_theta" value="2.0"/>
         <parameter key="laplace_k" value="1.0"/>
       </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (8)" width="90" x="916" y="1768">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_Vietnamese"/>
+      </operator>
       <connect from_op="Retrieve exa_single_tokens" from_port="output" to_op="Select Attributes" to_port="example set input"/>
       <connect from_op="Select Attributes" from_port="example set output" to_op="Set Role" to_port="example set input"/>
       <connect from_op="Set Role" from_port="example set output" to_op="Filter Examples" to_port="example set input"/>
@@ -612,7 +636,8 @@
       <connect from_op="FP-Growth (chinese)" from_port="example set" to_port="result 3"/>
       <connect from_op="FP-Growth (chinese)" from_port="frequent sets" to_op="Create Association Rules" to_port="item sets"/>
       <connect from_op="Create Association Rules" from_port="rules" to_port="result 1"/>
-      <connect from_op="Create Association Rules" from_port="item sets" to_port="result 2"/>
+      <connect from_op="Create Association Rules" from_port="item sets" to_op="Store" to_port="input"/>
+      <connect from_op="Store" from_port="through" to_port="result 2"/>
       <connect from_op="Retrieve exa_single_tokens (2)" from_port="output" to_op="Select Attributes (2)" to_port="example set input"/>
       <connect from_op="Select Attributes (2)" from_port="example set output" to_op="Set Role (2)" to_port="example set input"/>
       <connect from_op="Set Role (2)" from_port="example set output" to_op="Filter Examples (2)" to_port="example set input"/>
@@ -621,7 +646,8 @@
       <connect from_op="FP-Growth (french)" from_port="example set" to_port="result 4"/>
       <connect from_op="FP-Growth (french)" from_port="frequent sets" to_op="Create Association Rules (9)" to_port="item sets"/>
       <connect from_op="Create Association Rules (9)" from_port="rules" to_port="result 5"/>
-      <connect from_op="Create Association Rules (9)" from_port="item sets" to_port="result 6"/>
+      <connect from_op="Create Association Rules (9)" from_port="item sets" to_op="Store (2)" to_port="input"/>
+      <connect from_op="Store (2)" from_port="through" to_port="result 6"/>
       <connect from_op="Retrieve exa_single_tokens (3)" from_port="output" to_op="Select Attributes (3)" to_port="example set input"/>
       <connect from_op="Select Attributes (3)" from_port="example set output" to_op="Set Role (3)" to_port="example set input"/>
       <connect from_op="Set Role (3)" from_port="example set output" to_op="Filter Examples (3)" to_port="example set input"/>
@@ -630,7 +656,8 @@
       <connect from_op="FP-Growth (greek)" from_port="example set" to_port="result 7"/>
       <connect from_op="FP-Growth (greek)" from_port="frequent sets" to_op="Create Association Rules (3)" to_port="item sets"/>
       <connect from_op="Create Association Rules (3)" from_port="rules" to_port="result 8"/>
-      <connect from_op="Create Association Rules (3)" from_port="item sets" to_port="result 9"/>
+      <connect from_op="Create Association Rules (3)" from_port="item sets" to_op="Store (3)" to_port="input"/>
+      <connect from_op="Store (3)" from_port="through" to_port="result 9"/>
       <connect from_op="Retrieve exa_single_tokens (4)" from_port="output" to_op="Select Attributes (4)" to_port="example set input"/>
       <connect from_op="Select Attributes (4)" from_port="example set output" to_op="Set Role (4)" to_port="example set input"/>
       <connect from_op="Set Role (4)" from_port="example set output" to_op="Filter Examples (4)" to_port="example set input"/>
@@ -639,7 +666,8 @@
       <connect from_op="FP-Growth (iberic)" from_port="example set" to_port="result 19"/>
       <connect from_op="FP-Growth (iberic)" from_port="frequent sets" to_op="Create Association Rules (4)" to_port="item sets"/>
       <connect from_op="Create Association Rules (4)" from_port="rules" to_port="result 18"/>
-      <connect from_op="Create Association Rules (4)" from_port="item sets" to_port="result 20"/>
+      <connect from_op="Create Association Rules (4)" from_port="item sets" to_op="Store (4)" to_port="input"/>
+      <connect from_op="Store (4)" from_port="through" to_port="result 20"/>
       <connect from_op="Retrieve exa_single_tokens (5)" from_port="output" to_op="Select Attributes (5)" to_port="example set input"/>
       <connect from_op="Select Attributes (5)" from_port="example set output" to_op="Set Role (5)" to_port="example set input"/>
       <connect from_op="Set Role (5)" from_port="example set output" to_op="Filter Examples (5)" to_port="example set input"/>
@@ -648,7 +676,8 @@
       <connect from_op="FP-Growth (italian)" from_port="example set" to_port="result 17"/>
       <connect from_op="FP-Growth (italian)" from_port="frequent sets" to_op="Create Association Rules (5)" to_port="item sets"/>
       <connect from_op="Create Association Rules (5)" from_port="rules" to_port="result 16"/>
-      <connect from_op="Create Association Rules (5)" from_port="item sets" to_port="result 21"/>
+      <connect from_op="Create Association Rules (5)" from_port="item sets" to_op="Store (5)" to_port="input"/>
+      <connect from_op="Store (5)" from_port="through" to_port="result 21"/>
       <connect from_op="Retrieve exa_single_tokens (6)" from_port="output" to_op="Select Attributes (6)" to_port="example set input"/>
       <connect from_op="Select Attributes (6)" from_port="example set output" to_op="Set Role (6)" to_port="example set input"/>
       <connect from_op="Set Role (6)" from_port="example set output" to_op="Filter Examples (6)" to_port="example set input"/>
@@ -657,7 +686,8 @@
       <connect from_op="FP-Growth (korean)" from_port="example set" to_port="result 15"/>
       <connect from_op="FP-Growth (korean)" from_port="frequent sets" to_op="Create Association Rules (6)" to_port="item sets"/>
       <connect from_op="Create Association Rules (6)" from_port="rules" to_port="result 14"/>
-      <connect from_op="Create Association Rules (6)" from_port="item sets" to_port="result 22"/>
+      <connect from_op="Create Association Rules (6)" from_port="item sets" to_op="Store (6)" to_port="input"/>
+      <connect from_op="Store (6)" from_port="through" to_port="result 22"/>
       <connect from_op="Retrieve exa_single_tokens (7)" from_port="output" to_op="Select Attributes (7)" to_port="example set input"/>
       <connect from_op="Select Attributes (7)" from_port="example set output" to_op="Set Role (7)" to_port="example set input"/>
       <connect from_op="Set Role (7)" from_port="example set output" to_op="Filter Examples (7)" to_port="example set input"/>
@@ -666,7 +696,8 @@
       <connect from_op="FP-Growth (thai)" from_port="example set" to_port="result 13"/>
       <connect from_op="FP-Growth (thai)" from_port="frequent sets" to_op="Create Association Rules (7)" to_port="item sets"/>
       <connect from_op="Create Association Rules (7)" from_port="rules" to_port="result 12"/>
-      <connect from_op="Create Association Rules (7)" from_port="item sets" to_port="result 23"/>
+      <connect from_op="Create Association Rules (7)" from_port="item sets" to_op="Store (7)" to_port="input"/>
+      <connect from_op="Store (7)" from_port="through" to_port="result 23"/>
       <connect from_op="Retrieve exa_single_tokens (8)" from_port="output" to_op="Select Attributes (8)" to_port="example set input"/>
       <connect from_op="Select Attributes (8)" from_port="example set output" to_op="Set Role (8)" to_port="example set input"/>
       <connect from_op="Set Role (8)" from_port="example set output" to_op="Filter Examples (8)" to_port="example set input"/>
@@ -675,7 +706,8 @@
       <connect from_op="FP-Growth (vietnamese)" from_port="example set" to_port="result 11"/>
       <connect from_op="FP-Growth (vietnamese)" from_port="frequent sets" to_op="Create Association Rules (8)" to_port="item sets"/>
       <connect from_op="Create Association Rules (8)" from_port="rules" to_port="result 10"/>
-      <connect from_op="Create Association Rules (8)" from_port="item sets" to_port="result 24"/>
+      <connect from_op="Create Association Rules (8)" from_port="item sets" to_op="Store (8)" to_port="input"/>
+      <connect from_op="Store (8)" from_port="through" to_port="result 24"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
