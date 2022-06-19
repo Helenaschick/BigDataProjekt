@@ -86,8 +86,11 @@
         <parameter key="gain_theta" value="2.0"/>
         <parameter key="laplace_k" value="1.0"/>
       </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (9)" width="90" x="916" y="187">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_Chinese_rul"/>
+      </operator>
       <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="916" y="289">
-        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_Chinese"/>
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_Chinese_item"/>
       </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve exa_single_tokens (2)" width="90" x="45" y="340">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_single_tokens"/>
@@ -635,8 +638,9 @@
       <connect from_op="Numerical to Binominal" from_port="example set output" to_op="FP-Growth (chinese)" to_port="example set"/>
       <connect from_op="FP-Growth (chinese)" from_port="example set" to_port="result 3"/>
       <connect from_op="FP-Growth (chinese)" from_port="frequent sets" to_op="Create Association Rules" to_port="item sets"/>
-      <connect from_op="Create Association Rules" from_port="rules" to_port="result 1"/>
+      <connect from_op="Create Association Rules" from_port="rules" to_op="Store (9)" to_port="input"/>
       <connect from_op="Create Association Rules" from_port="item sets" to_op="Store" to_port="input"/>
+      <connect from_op="Store (9)" from_port="through" to_port="result 1"/>
       <connect from_op="Store" from_port="through" to_port="result 2"/>
       <connect from_op="Retrieve exa_single_tokens (2)" from_port="output" to_op="Select Attributes (2)" to_port="example set input"/>
       <connect from_op="Select Attributes (2)" from_port="example set output" to_op="Set Role (2)" to_port="example set input"/>
