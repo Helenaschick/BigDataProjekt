@@ -31,7 +31,7 @@
         <parameter key="include_special_attributes" value="true"/>
       </operator>
       <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Multiply" width="90" x="313" y="34"/>
-      <operator activated="false" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (7)" width="90" x="648" y="238">
+      <operator activated="false" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (7)" width="90" x="849" y="238">
         <list key="parameters">
           <parameter key="Cross Validation (11).sampling_type" value="automatic"/>
         </list>
@@ -142,7 +142,7 @@
         <parameter key="invert_selection" value="true"/>
         <parameter key="include_special_attributes" value="true"/>
       </operator>
-      <operator activated="false" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid)" width="90" x="514" y="34">
+      <operator activated="false" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid)" width="90" x="715" y="34">
         <list key="parameters">
           <parameter key="Model Decision Tree.maximal_depth" value="[40;41;2;linear]"/>
         </list>
@@ -301,7 +301,7 @@
         <parameter key="invert_selection" value="true"/>
         <parameter key="include_special_attributes" value="true"/>
       </operator>
-      <operator activated="false" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (6)" width="90" x="648" y="34">
+      <operator activated="false" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (6)" width="90" x="849" y="34">
         <list key="parameters">
           <parameter key="Random Forest.number_of_trees" value="[40;40;10;linear]"/>
         </list>
@@ -401,7 +401,7 @@
         </process>
         <description align="center" color="transparent" colored="false" width="126">Random Forest&lt;br/&gt;</description>
       </operator>
-      <operator activated="false" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (3)" width="90" x="782" y="34">
+      <operator activated="false" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (3)" width="90" x="983" y="34">
         <list key="parameters"/>
         <parameter key="error_handling" value="fail on error"/>
         <parameter key="log_performance" value="true"/>
@@ -501,7 +501,7 @@
         </process>
         <description align="center" color="transparent" colored="false" width="126">Gradient Boosted Tree&lt;br/&gt;</description>
       </operator>
-      <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (8)" width="90" x="782" y="238">
+      <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (8)" width="90" x="983" y="238">
         <list key="parameters">
           <parameter key="Cross Validation (12).number_of_folds" value="[52;70;20;linear]"/>
         </list>
@@ -603,7 +603,7 @@
         <parameter key="invert_selection" value="true"/>
         <parameter key="include_special_attributes" value="true"/>
       </operator>
-      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Subprocess" width="90" x="514" y="238">
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Subprocess" width="90" x="715" y="238">
         <process expanded="true">
           <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (5)" width="90" x="112" y="34">
             <list key="parameters">
@@ -685,6 +685,17 @@
           <portSpacing port="sink_out 2" spacing="0"/>
         </process>
         <description align="center" color="transparent" colored="false" width="126">k-NN</description>
+      </operator>
+      <operator activated="true" class="weight_by_pca" compatibility="9.10.008" expanded="true" height="82" name="Weight by PCA" width="90" x="380" y="391">
+        <parameter key="normalize_weights" value="false"/>
+        <parameter key="sort_weights" value="true"/>
+        <parameter key="sort_direction" value="ascending"/>
+        <parameter key="component_number" value="1"/>
+      </operator>
+      <operator activated="true" class="principal_component_analysis" compatibility="9.10.008" expanded="true" height="103" name="PCA" width="90" x="581" y="391">
+        <parameter key="dimensionality_reduction" value="keep variance"/>
+        <parameter key="variance_threshold" value="0.95"/>
+        <parameter key="number_of_components" value="1"/>
       </operator>
       <connect from_op="Retrieve 2 grams" from_port="output" to_op="Select Attributes" to_port="example set input"/>
       <connect from_op="Select Attributes" from_port="example set output" to_op="Multiply" to_port="input"/>
