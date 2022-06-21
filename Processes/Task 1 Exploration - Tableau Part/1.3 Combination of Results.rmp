@@ -153,7 +153,7 @@
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_single_all_cuisines"/>
         <description align="center" color="transparent" colored="false" width="126">retrieve Freq. Comb. Single Tokens</description>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve (4)" width="90" x="112" y="544">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve (4)" width="90" x="112" y="595">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration- Tableau Part/Freq_comb_2_grams_all_cuisines"/>
         <description align="center" color="transparent" colored="false" width="126">retrieve Freq. Comb. 2 grams</description>
       </operator>
