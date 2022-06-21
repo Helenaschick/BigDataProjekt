@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="9.10.008">
+<?xml version="1.0" encoding="UTF-8"?><process version="9.10.001">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="9.10.008" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="9.10.001" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -12,14 +12,14 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve 2grams_train" width="90" x="112" y="34">
+      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve 2grams_data_train" width="90" x="112" y="85">
         <parameter key="repository_entry" value="../../Data/Training_Data/Training_Data/2grams_data_train"/>
       </operator>
       <operator activated="true" class="text:wordlist_to_data" compatibility="9.4.000" expanded="true" height="82" name="WordList to Data" width="90" x="313" y="34"/>
-      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store wordlist_train" width="90" x="581" y="34">
+      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store wordlist_train" width="90" x="581" y="34">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/wordlist_to_data_2grams_train"/>
       </operator>
-      <connect from_op="Retrieve 2grams_train" from_port="output" to_op="WordList to Data" to_port="word list"/>
+      <connect from_op="Retrieve 2grams_data_train" from_port="output" to_op="WordList to Data" to_port="word list"/>
       <connect from_op="WordList to Data" from_port="example set" to_op="Store wordlist_train" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>

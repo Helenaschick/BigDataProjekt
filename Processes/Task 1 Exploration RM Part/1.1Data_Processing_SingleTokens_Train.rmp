@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="9.10.008">
+<?xml version="1.0" encoding="UTF-8"?><process version="9.10.001">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="9.10.008" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="9.10.001" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -14,14 +14,14 @@
     <process expanded="true">
       <operator activated="true" class="text:process_document_from_file" compatibility="9.4.000" expanded="true" height="82" name="Process Documents from Files" width="90" x="179" y="34">
         <list key="text_directories">
-          <parameter key="chinese" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/chinese"/>
-          <parameter key="korean" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/korean"/>
-          <parameter key="italian" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/italian"/>
-          <parameter key="thai" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/thai"/>
-          <parameter key="iberic" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/iberic"/>
-          <parameter key="vietnamese" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/vietnamese"/>
-          <parameter key="french" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/french"/>
-          <parameter key="greek" value="/Users/helena.schick/Documents/BigData/Data/Training_Data/Training_Data/greek"/>
+          <parameter key="chinese" value="/Users/viktoria/Desktop/Training_Data/Training_Data/chinese"/>
+          <parameter key="korean" value="/Users/viktoria/Desktop/Training_Data/Training_Data/korean"/>
+          <parameter key="italian" value="/Users/viktoria/Desktop/Training_Data/Training_Data/italian"/>
+          <parameter key="thai" value="/Users/viktoria/Desktop/Training_Data/Training_Data/tthai"/>
+          <parameter key="iberic" value="/Users/viktoria/Desktop/Training_Data/Training_Data/iberic"/>
+          <parameter key="vietnamese" value="/Users/viktoria/Desktop/Training_Data/Training_Data/vietnamese"/>
+          <parameter key="french" value="/Users/viktoria/Desktop/Training_Data/Training_Data/french"/>
+          <parameter key="greek" value="/Users/viktoria/Desktop/Training_Data/Training_Data/greek"/>
         </list>
         <parameter key="file_pattern" value="*"/>
         <parameter key="extract_text_only" value="true"/>
@@ -40,9 +40,9 @@
         <parameter key="datamanagement" value="double_sparse_array"/>
         <parameter key="data_management" value="auto"/>
         <process expanded="true">
-          <operator activated="true" class="open_file" compatibility="9.10.008" expanded="true" height="68" name="Open File" width="90" x="916" y="136">
+          <operator activated="true" class="open_file" compatibility="9.10.001" expanded="true" height="68" name="Open File" width="90" x="916" y="136">
             <parameter key="resource_type" value="file"/>
-            <parameter key="filename" value="/Users/helena.schick/Documents/BigData/Data/Task 1 Exploration RM Part/stop_words_new.txt"/>
+            <parameter key="filename" value="/Users/viktoria/Desktop/stop_words_new.txt"/>
           </operator>
           <operator activated="true" class="text:tokenize" compatibility="9.4.000" expanded="true" height="68" name="Tokenize" width="90" x="45" y="34">
             <parameter key="mode" value="non letters"/>
@@ -73,6 +73,7 @@
             <parameter key="case_sensitive" value="false"/>
             <parameter key="encoding" value="UTF-8"/>
           </operator>
+          <operator activated="true" class="text:stem_porter" compatibility="9.4.000" expanded="true" height="68" name="Stem (Porter)" width="90" x="1251" y="34"/>
           <connect from_port="document" to_op="Tokenize" to_port="document"/>
           <connect from_op="Open File" from_port="file" to_op="Filter Stopwords (Dictionary) (2)" to_port="file"/>
           <connect from_op="Tokenize" from_port="document" to_op="Replace Tokens" to_port="document"/>
@@ -81,22 +82,30 @@
           <connect from_op="Filter Tokens (by POS Tags)" from_port="document" to_op="Transform Cases" to_port="document"/>
           <connect from_op="Transform Cases" from_port="document" to_op="Filter Tokens (by Length)" to_port="document"/>
           <connect from_op="Filter Tokens (by Length)" from_port="document" to_op="Filter Stopwords (Dictionary) (2)" to_port="document"/>
-          <connect from_op="Filter Stopwords (Dictionary) (2)" from_port="document" to_port="document 1"/>
+          <connect from_op="Filter Stopwords (Dictionary) (2)" from_port="document" to_op="Stem (Porter)" to_port="document"/>
+          <connect from_op="Stem (Porter)" from_port="document" to_port="document 1"/>
           <portSpacing port="source_document" spacing="0"/>
           <portSpacing port="sink_document 1" spacing="0"/>
           <portSpacing port="sink_document 2" spacing="0"/>
           <description align="center" color="yellow" colored="false" height="145" resized="false" width="180" x="1071" y="142">Stopword Liste manuell erststellt, nach erstem Lauf :&lt;br/&gt;- alle Zutaten entfernt&lt;br/&gt;- Zutaten, die in allen Rezepten h&amp;#228;ufig vorkommen hinzugef&amp;#252;gt (date, water, salt, pepper)</description>
         </process>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store exa" width="90" x="447" y="34">
-        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_single_tokens_train"/>
-      </operator>
-      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store wordlist" width="90" x="447" y="136">
+      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store wordlist" width="90" x="447" y="136">
         <parameter key="repository_entry" value="../../Data/Training_Data/Training_Data/single_tokens_train"/>
       </operator>
+      <operator activated="true" class="generate_attributes" compatibility="9.10.001" expanded="true" height="82" name="Generate Attributes" width="90" x="313" y="34">
+        <list key="function_descriptions">
+          <parameter key="test/train" value="&quot;train&quot;"/>
+        </list>
+        <parameter key="keep_all" value="true"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store exa" width="90" x="447" y="34">
+        <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_single_tokens_train"/>
+      </operator>
       <connect from_port="input 1" to_op="Process Documents from Files" to_port="word list"/>
-      <connect from_op="Process Documents from Files" from_port="example set" to_op="Store exa" to_port="input"/>
+      <connect from_op="Process Documents from Files" from_port="example set" to_op="Generate Attributes" to_port="example set input"/>
       <connect from_op="Process Documents from Files" from_port="word list" to_op="Store wordlist" to_port="input"/>
+      <connect from_op="Generate Attributes" from_port="example set output" to_op="Store exa" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="source_input 2" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
