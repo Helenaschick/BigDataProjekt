@@ -15,8 +15,8 @@
       <operator activated="true" class="text:process_document_from_file" compatibility="9.4.000" expanded="true" height="82" name="Process Documents from Files" width="90" x="179" y="34">
         <list key="text_directories">
           <parameter key="chinese" value="/Users/viktoria/Desktop/Training_Data/Training_Data/chinese"/>
-          <parameter key="korean" value="/Users/viktoria/Desktop/Training_Data/Training_Data/Training_Data/Training_Data/korean"/>
-          <parameter key="italian" value="/Users/viktoria/Desktop/Training_Data/Training_Data/Training_Data/italian"/>
+          <parameter key="korean" value="/Users/viktoria/Desktop/Training_Data/Training_Data/korean"/>
+          <parameter key="italian" value="/Users/viktoria/Desktop/Training_Data/Training_Data/italian"/>
           <parameter key="thai" value="/Users/viktoria/Desktop/Training_Data/Training_Data/thai"/>
           <parameter key="iberic" value="/Users/viktoria/Desktop/Training_Data/Training_Data/iberic"/>
           <parameter key="vietnamese" value="/Users/viktoria/Desktop/Training_Data/Training_Data/vietnamese"/>

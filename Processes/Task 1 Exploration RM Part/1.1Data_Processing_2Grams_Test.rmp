@@ -18,8 +18,8 @@
           <parameter key="korean" value="/Users/viktoria/Desktop/Test_Data/korean"/>
           <parameter key="italian" value="/Users/viktoria/Desktop/Test_Data/italian"/>
           <parameter key="thai" value="/Users/viktoria/Desktop/Test_Data/thai"/>
-          <parameter key="iberic" value="/Users/viktoria/Desktop/Test_Dataiberic"/>
-          <parameter key="vietnamese" value="/Users/viktoria/Desktop/Test_Datavietnamese"/>
+          <parameter key="iberic" value="/Users/viktoria/Desktop/Test_Data/iberic"/>
+          <parameter key="vietnamese" value="/Users/viktoria/Desktop/Test_Data/vietnamese"/>
           <parameter key="french" value="/Users/viktoria/Desktop/Test_Data/french"/>
           <parameter key="greek" value="/Users/viktoria/Desktop/Test_Data/french"/>
         </list>

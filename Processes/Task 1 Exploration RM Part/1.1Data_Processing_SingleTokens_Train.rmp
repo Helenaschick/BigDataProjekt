@@ -17,7 +17,7 @@
           <parameter key="chinese" value="/Users/viktoria/Desktop/Training_Data/Training_Data/chinese"/>
           <parameter key="korean" value="/Users/viktoria/Desktop/Training_Data/Training_Data/korean"/>
           <parameter key="italian" value="/Users/viktoria/Desktop/Training_Data/Training_Data/italian"/>
-          <parameter key="thai" value="/Users/viktoria/Desktop/Training_Data/Training_Data/tthai"/>
+          <parameter key="thai" value="/Users/viktoria/Desktop/Training_Data/Training_Data/thai"/>
           <parameter key="iberic" value="/Users/viktoria/Desktop/Training_Data/Training_Data/iberic"/>
           <parameter key="vietnamese" value="/Users/viktoria/Desktop/Training_Data/Training_Data/vietnamese"/>
           <parameter key="french" value="/Users/viktoria/Desktop/Training_Data/Training_Data/french"/>
