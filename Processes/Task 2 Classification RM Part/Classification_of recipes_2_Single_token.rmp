@@ -647,7 +647,7 @@
       </operator>
       <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (8)" width="90" x="715" y="238">
         <list key="parameters">
-          <parameter key="Cross Validation (12).number_of_folds" value="[52;70;20;linear]"/>
+          <parameter key="Cross Validation (12).number_of_folds" value="[5;40;20;linear]"/>
         </list>
         <parameter key="error_handling" value="fail on error"/>
         <parameter key="log_performance" value="true"/>
@@ -782,7 +782,7 @@
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
       <portSpacing port="sink_result 3" spacing="0"/>
-      <description align="center" color="yellow" colored="false" height="50" resized="false" width="126" x="22" y="111">Retrieve Exa_2_grams Data</description>
+      <description align="center" color="yellow" colored="false" height="67" resized="false" width="126" x="22" y="111">Retrieve Exa_2_Single_token Data</description>
     </process>
   </operator>
 </process>
