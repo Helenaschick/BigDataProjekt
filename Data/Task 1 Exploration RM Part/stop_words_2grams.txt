@@ -20,3 +20,13 @@ york_york
 lamb_lamb
 sesam_sesam
 broth_broth
+noodl_noodl
+rib_rib
+bread_bread
+cooki_cooki
+pasta_pasta
+cabbag_cabbag
+mushroom_mushroom
+egg_egg
+tortellini_tortellini
+spaghetti_spaghetti
