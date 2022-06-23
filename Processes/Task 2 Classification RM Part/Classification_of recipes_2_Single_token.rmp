@@ -573,64 +573,59 @@
         <parameter key="include_special_attributes" value="false"/>
         <description align="center" color="transparent" colored="false" width="126">Remove test/train attribute</description>
       </operator>
-      <operator activated="false" class="weight_by_information_gain" compatibility="9.10.008" expanded="true" height="82" name="Weight by Information Gain" width="90" x="514" y="187">
+      <operator activated="true" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index" width="90" x="447" y="442">
+        <parameter key="normalize_weights" value="false"/>
+        <parameter key="sort_weights" value="true"/>
+        <parameter key="sort_direction" value="ascending"/>
+        <description align="center" color="transparent" colored="false" width="126">78% with naive</description>
+      </operator>
+      <operator activated="false" class="weight_by_information_gain" compatibility="9.10.008" expanded="true" height="82" name="Weight by Information Gain" width="90" x="581" y="595">
         <parameter key="normalize_weights" value="false"/>
         <parameter key="sort_weights" value="true"/>
         <parameter key="sort_direction" value="ascending"/>
         <description align="center" color="transparent" colored="false" width="126">75% with Naive</description>
       </operator>
-      <operator activated="false" class="weight_by_information_gain_ratio" compatibility="9.10.008" expanded="true" height="82" name="Weight by Information Gain Ratio" width="90" x="380" y="187">
+      <operator activated="false" class="weight_by_information_gain_ratio" compatibility="9.10.008" expanded="true" height="82" name="Weight by Information Gain Ratio" width="90" x="581" y="748">
         <parameter key="normalize_weights" value="false"/>
         <parameter key="sort_weights" value="true"/>
         <parameter key="sort_direction" value="ascending"/>
         <description align="center" color="transparent" colored="false" width="126">85% with Naive</description>
       </operator>
-      <operator activated="false" class="weight_by_rule" compatibility="9.10.008" expanded="true" height="82" name="Weight by Rule" width="90" x="380" y="952">
+      <operator activated="false" class="weight_by_rule" compatibility="9.10.008" expanded="true" height="82" name="Weight by Rule" width="90" x="45" y="646">
         <parameter key="normalize_weights" value="false"/>
         <parameter key="sort_weights" value="true"/>
         <parameter key="sort_direction" value="ascending"/>
+        <description align="center" color="transparent" colored="false" width="126">50% with naive</description>
       </operator>
-      <operator activated="false" class="weight_by_value_average" compatibility="9.10.008" expanded="true" height="82" name="Weight by Value Average" width="90" x="246" y="850">
-        <parameter key="normalize_weights" value="false"/>
-        <parameter key="sort_weights" value="true"/>
-        <parameter key="sort_direction" value="ascending"/>
-      </operator>
-      <operator activated="false" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation" width="90" x="246" y="952">
+      <operator activated="false" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation" width="90" x="45" y="1105">
         <parameter key="normalize_weights" value="false"/>
         <parameter key="sort_weights" value="true"/>
         <parameter key="sort_direction" value="ascending"/>
         <parameter key="normalize" value="none"/>
+        <description align="center" color="transparent" colored="false" width="126">59% with naive</description>
       </operator>
-      <operator activated="false" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation" width="90" x="447" y="187">
+      <operator activated="false" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation" width="90" x="179" y="850">
         <parameter key="normalize_weights" value="false"/>
         <parameter key="sort_weights" value="true"/>
         <parameter key="sort_direction" value="ascending"/>
         <parameter key="squared_correlation" value="false"/>
         <description align="center" color="transparent" colored="false" width="126">52% with naive</description>
       </operator>
-      <operator activated="false" class="weight_by_chi_squared_statistic" compatibility="9.10.008" expanded="true" height="82" name="Weight by Chi Squared Statistic" width="90" x="514" y="952">
+      <operator activated="false" class="weight_by_chi_squared_statistic" compatibility="9.10.008" expanded="true" height="82" name="Weight by Chi Squared Statistic" width="90" x="179" y="697">
         <parameter key="normalize_weights" value="false"/>
         <parameter key="sort_weights" value="true"/>
         <parameter key="sort_direction" value="ascending"/>
         <parameter key="number_of_bins" value="10"/>
+        <description align="center" color="transparent" colored="false" width="126">68% with naive</description>
       </operator>
-      <operator activated="false" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index" width="90" x="112" y="850">
-        <parameter key="normalize_weights" value="false"/>
-        <parameter key="sort_weights" value="true"/>
-        <parameter key="sort_direction" value="ascending"/>
-      </operator>
-      <operator activated="false" class="weight_by_forest" compatibility="9.10.008" expanded="true" height="82" name="Weight by Tree Importance" width="90" x="112" y="952">
-        <parameter key="criterion" value="gain_ratio"/>
-        <parameter key="normalize_weights" value="false"/>
-      </operator>
-      <operator activated="true" class="weight_by_uncertainty" compatibility="9.10.008" expanded="true" height="82" name="Weight by Uncertainty" width="90" x="447" y="391">
+      <operator activated="false" class="weight_by_uncertainty" compatibility="9.10.008" expanded="true" height="82" name="Weight by Uncertainty" width="90" x="45" y="799">
         <parameter key="normalize_weights" value="false"/>
         <parameter key="sort_weights" value="true"/>
         <parameter key="sort_direction" value="ascending"/>
         <parameter key="number_of_bins" value="10"/>
         <description align="center" color="transparent" colored="false" width="126">65% with naive&lt;br/&gt;</description>
       </operator>
-      <operator activated="false" class="weight_by_relief" compatibility="9.10.008" expanded="true" height="82" name="Weight by Relief" width="90" x="648" y="952">
+      <operator activated="false" class="weight_by_relief" compatibility="9.10.008" expanded="true" height="82" name="Weight by Relief" width="90" x="179" y="1054">
         <parameter key="normalize_weights" value="false"/>
         <parameter key="sort_weights" value="true"/>
         <parameter key="sort_direction" value="ascending"/>
@@ -638,14 +633,16 @@
         <parameter key="sample_ratio" value="1.0"/>
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
+        <description align="center" color="transparent" colored="false" width="126">63% with naive</description>
       </operator>
-      <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM" width="90" x="45" y="799">
+      <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM" width="90" x="447" y="646">
         <parameter key="normalize_weights" value="false"/>
         <parameter key="sort_weights" value="true"/>
         <parameter key="sort_direction" value="ascending"/>
         <parameter key="C" value="0.0"/>
+        <description align="center" color="transparent" colored="false" width="126">84% with naive</description>
       </operator>
-      <operator activated="false" class="weight_by_pca" compatibility="9.10.008" expanded="true" height="82" name="Weight by PCA" width="90" x="648" y="136">
+      <operator activated="false" class="weight_by_pca" compatibility="9.10.008" expanded="true" height="82" name="Weight by PCA" width="90" x="45" y="952">
         <parameter key="normalize_weights" value="false"/>
         <parameter key="sort_weights" value="true"/>
         <parameter key="sort_direction" value="ascending"/>
@@ -784,9 +781,9 @@
       <connect from_op="Filter Examples (2)" from_port="example set output" to_op="Select Attributes (7)" to_port="example set input"/>
       <connect from_op="Filter Examples" from_port="example set output" to_op="Select Attributes (6)" to_port="example set input"/>
       <connect from_op="Select Attributes (6)" from_port="example set output" to_op="Apply Model" to_port="unlabelled data"/>
-      <connect from_op="Select Attributes (7)" from_port="example set output" to_op="Weight by Uncertainty" to_port="example set"/>
-      <connect from_op="Weight by Uncertainty" from_port="weights" to_op="Select by Weights" to_port="weights"/>
-      <connect from_op="Weight by Uncertainty" from_port="example set" to_op="Select by Weights" to_port="example set input"/>
+      <connect from_op="Select Attributes (7)" from_port="example set output" to_op="Weight by Gini Index" to_port="example set"/>
+      <connect from_op="Weight by Gini Index" from_port="weights" to_op="Select by Weights" to_port="weights"/>
+      <connect from_op="Weight by Gini Index" from_port="example set" to_op="Select by Weights" to_port="example set input"/>
       <connect from_op="Select by Weights" from_port="example set output" to_op="Optimize Parameters (Grid) (8)" to_port="input 1"/>
       <connect from_op="Select by Weights" from_port="weights" to_port="result 1"/>
       <connect from_op="Optimize Parameters (Grid) (8)" from_port="performance" to_port="result 2"/>
