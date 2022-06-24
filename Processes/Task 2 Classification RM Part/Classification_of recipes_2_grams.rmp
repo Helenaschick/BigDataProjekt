@@ -412,8 +412,8 @@
         </process>
       </operator>
       <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Test data" width="90" x="313" y="136"/>
-      <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Trainingsdata" width="90" x="313" y="34"/>
-      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="Naive Bayes (2)" width="90" x="715" y="34">
+      <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Train data" width="90" x="313" y="34"/>
+      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Naive Bayes (2)" width="90" x="715" y="34">
         <process expanded="true">
           <operator activated="true" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM" width="90" x="380" y="34">
             <parameter key="normalize_weights" value="false"/>
@@ -569,6 +569,7 @@
           <connect from_op="Apply Model" from_port="labelled data" to_op="Performance Test Data" to_port="labelled data"/>
           <connect from_op="Performance Test Data" from_port="performance" to_op="Confusion Matrix to ExampleSet" to_port="per"/>
           <connect from_op="Confusion Matrix to ExampleSet" from_port="exa" to_op="Generate Attributes" to_port="example set input"/>
+          <connect from_op="Confusion Matrix to ExampleSet" from_port="ori" to_port="out 3"/>
           <connect from_op="Generate Attributes" from_port="example set output" to_op="Store" to_port="input"/>
           <connect from_op="Store" from_port="through" to_port="out 2"/>
           <portSpacing port="source_in 1" spacing="0"/>
@@ -577,6 +578,7 @@
           <portSpacing port="sink_out 1" spacing="0"/>
           <portSpacing port="sink_out 2" spacing="0"/>
           <portSpacing port="sink_out 3" spacing="0"/>
+          <portSpacing port="sink_out 4" spacing="0"/>
         </process>
       </operator>
       <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="Subprocess" width="90" x="782" y="493">
@@ -765,16 +767,18 @@
         <description align="center" color="transparent" colored="false" width="126">Random Forest&lt;br/&gt;</description>
       </operator>
       <connect from_op="Retrieve 2 grams" from_port="output" to_op="Data Prep 1" to_port="in 1"/>
-      <connect from_op="Data Prep 1" from_port="out 1" to_op="Trainingsdata" to_port="input"/>
+      <connect from_op="Data Prep 1" from_port="out 1" to_op="Train data" to_port="input"/>
       <connect from_op="Data Prep 1" from_port="out 2" to_op="Test data" to_port="input"/>
       <connect from_op="Test data" from_port="output 1" to_op="Naive Bayes (2)" to_port="in 2"/>
-      <connect from_op="Trainingsdata" from_port="output 1" to_op="Naive Bayes (2)" to_port="in 1"/>
+      <connect from_op="Train data" from_port="output 1" to_op="Naive Bayes (2)" to_port="in 1"/>
       <connect from_op="Naive Bayes (2)" from_port="out 1" to_port="result 1"/>
       <connect from_op="Naive Bayes (2)" from_port="out 2" to_port="result 2"/>
+      <connect from_op="Naive Bayes (2)" from_port="out 3" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
       <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
       <description align="center" color="yellow" colored="false" height="67" resized="false" width="126" x="22" y="111">Retrieve Exa_2_grams_Data</description>
     </process>
   </operator>

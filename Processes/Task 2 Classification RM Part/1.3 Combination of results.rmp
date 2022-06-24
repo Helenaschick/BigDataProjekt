@@ -15,7 +15,9 @@
       <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve" width="90" x="112" y="136">
         <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Naive Bayes"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve (2)" width="90" x="112" y="289"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve (2)" width="90" x="112" y="289">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Naive Bayes"/>
+      </operator>
       <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union" width="90" x="313" y="238"/>
       <operator activated="false" class="write_excel" compatibility="9.10.008" expanded="true" height="82" name="Write Excel" width="90" x="581" y="391">
         <parameter key="file_format" value="xlsx"/>
