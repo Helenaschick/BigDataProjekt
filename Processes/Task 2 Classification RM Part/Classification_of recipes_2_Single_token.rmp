@@ -748,29 +748,38 @@
       <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance" width="90" x="983" y="442">
         <parameter key="main_criterion" value="first"/>
         <parameter key="accuracy" value="true"/>
-        <parameter key="classification_error" value="false"/>
-        <parameter key="kappa" value="false"/>
-        <parameter key="weighted_mean_recall" value="false"/>
-        <parameter key="weighted_mean_precision" value="false"/>
-        <parameter key="spearman_rho" value="false"/>
-        <parameter key="kendall_tau" value="false"/>
-        <parameter key="absolute_error" value="false"/>
-        <parameter key="relative_error" value="false"/>
-        <parameter key="relative_error_lenient" value="false"/>
-        <parameter key="relative_error_strict" value="false"/>
-        <parameter key="normalized_absolute_error" value="false"/>
-        <parameter key="root_mean_squared_error" value="false"/>
-        <parameter key="root_relative_squared_error" value="false"/>
-        <parameter key="squared_error" value="false"/>
-        <parameter key="correlation" value="false"/>
-        <parameter key="squared_correlation" value="false"/>
-        <parameter key="cross-entropy" value="false"/>
-        <parameter key="margin" value="false"/>
-        <parameter key="soft_margin_loss" value="false"/>
-        <parameter key="logistic_loss" value="false"/>
+        <parameter key="classification_error" value="true"/>
+        <parameter key="kappa" value="true"/>
+        <parameter key="weighted_mean_recall" value="true"/>
+        <parameter key="weighted_mean_precision" value="true"/>
+        <parameter key="spearman_rho" value="true"/>
+        <parameter key="kendall_tau" value="true"/>
+        <parameter key="absolute_error" value="true"/>
+        <parameter key="relative_error" value="true"/>
+        <parameter key="relative_error_lenient" value="true"/>
+        <parameter key="relative_error_strict" value="true"/>
+        <parameter key="normalized_absolute_error" value="true"/>
+        <parameter key="root_mean_squared_error" value="true"/>
+        <parameter key="root_relative_squared_error" value="true"/>
+        <parameter key="squared_error" value="true"/>
+        <parameter key="correlation" value="true"/>
+        <parameter key="squared_correlation" value="true"/>
+        <parameter key="cross-entropy" value="true"/>
+        <parameter key="margin" value="true"/>
+        <parameter key="soft_margin_loss" value="true"/>
+        <parameter key="logistic_loss" value="true"/>
         <parameter key="skip_undefined_labels" value="true"/>
         <parameter key="use_example_weights" value="true"/>
         <list key="class_weights"/>
+      </operator>
+      <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet" width="90" x="1117" y="442"/>
+      <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="1251" y="442">
+        <parameter key="file_format" value="xlsx"/>
+        <enumeration key="sheet_names"/>
+        <parameter key="sheet_name" value="RapidMiner Data"/>
+        <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+        <parameter key="number_format" value="#.0"/>
+        <parameter key="encoding" value="SYSTEM"/>
       </operator>
       <connect from_op="Retrieve 2 grams" from_port="output" to_op="Set Role (2)" to_port="example set input"/>
       <connect from_op="Set Role (2)" from_port="example set output" to_op="Select Attributes" to_port="example set input"/>
@@ -789,7 +798,9 @@
       <connect from_op="Optimize Parameters (Grid) (8)" from_port="performance" to_port="result 2"/>
       <connect from_op="Optimize Parameters (Grid) (8)" from_port="model" to_op="Apply Model" to_port="model"/>
       <connect from_op="Apply Model" from_port="labelled data" to_op="Performance" to_port="labelled data"/>
-      <connect from_op="Performance" from_port="performance" to_port="result 3"/>
+      <connect from_op="Performance" from_port="performance" to_op="Confusion Matrix to ExampleSet" to_port="per"/>
+      <connect from_op="Confusion Matrix to ExampleSet" from_port="exa" to_op="Write Excel" to_port="input"/>
+      <connect from_op="Write Excel" from_port="through" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
