@@ -730,6 +730,16 @@
         <list key="class_weights"/>
       </operator>
       <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet" width="90" x="648" y="289"/>
+      <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes" width="90" x="983" y="391">
+        <list key="function_descriptions">
+          <parameter key="Data Basis" value="&quot;2 Grams&quot;"/>
+          <parameter key="Algorithm" value="&quot;Naive Bayes&quot;"/>
+        </list>
+        <parameter key="keep_all" value="true"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="1117" y="391">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Naive Bayes"/>
+      </operator>
       <connect from_op="Retrieve 2 grams" from_port="output" to_op="Data Prep 1" to_port="in 1"/>
       <connect from_op="Data Prep 1" from_port="out 1" to_op="Weight by SVM" to_port="example set"/>
       <connect from_op="Data Prep 1" from_port="out 2" to_op="Apply Model" to_port="unlabelled data"/>
@@ -740,7 +750,9 @@
       <connect from_op="Optimize Parameters (Grid) (8)" from_port="model" to_op="Apply Model" to_port="model"/>
       <connect from_op="Apply Model" from_port="labelled data" to_op="Performance Test Data" to_port="labelled data"/>
       <connect from_op="Performance Test Data" from_port="performance" to_op="Confusion Matrix to ExampleSet" to_port="per"/>
-      <connect from_op="Confusion Matrix to ExampleSet" from_port="exa" to_port="result 2"/>
+      <connect from_op="Confusion Matrix to ExampleSet" from_port="exa" to_op="Generate Attributes" to_port="example set input"/>
+      <connect from_op="Generate Attributes" from_port="example set output" to_op="Store" to_port="input"/>
+      <connect from_op="Store" from_port="through" to_port="result 2"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
