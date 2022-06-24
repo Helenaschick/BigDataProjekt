@@ -477,7 +477,7 @@
                     <list key="application_parameters"/>
                     <parameter key="create_view" value="false"/>
                   </operator>
-                  <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="KNN Train" width="90" x="246" y="34">
+                  <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Naive Bayes (2)" width="90" x="246" y="34">
                     <parameter key="main_criterion" value="first"/>
                     <parameter key="accuracy" value="true"/>
                     <parameter key="classification_error" value="false"/>
@@ -506,9 +506,9 @@
                   </operator>
                   <connect from_port="model" to_op="Apply Model. (15)" to_port="model"/>
                   <connect from_port="test set" to_op="Apply Model. (15)" to_port="unlabelled data"/>
-                  <connect from_op="Apply Model. (15)" from_port="labelled data" to_op="KNN Train" to_port="labelled data"/>
-                  <connect from_op="KNN Train" from_port="performance" to_port="performance 1"/>
-                  <connect from_op="KNN Train" from_port="example set" to_port="test set results"/>
+                  <connect from_op="Apply Model. (15)" from_port="labelled data" to_op="Performance Naive Bayes (2)" to_port="labelled data"/>
+                  <connect from_op="Performance Naive Bayes (2)" from_port="performance" to_port="performance 1"/>
+                  <connect from_op="Performance Naive Bayes (2)" from_port="example set" to_port="test set results"/>
                   <portSpacing port="source_model" spacing="0"/>
                   <portSpacing port="source_test set" spacing="0"/>
                   <portSpacing port="source_through 1" spacing="0"/>
@@ -536,7 +536,7 @@
             <list key="application_parameters"/>
             <parameter key="create_view" value="false"/>
           </operator>
-          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="KNN Test" width="90" x="715" y="289">
+          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data (2)" width="90" x="715" y="289">
             <parameter key="main_criterion" value="first"/>
             <parameter key="accuracy" value="true"/>
             <parameter key="classification_error" value="false"/>
@@ -581,8 +581,8 @@
           <connect from_op="Select by Weights (2)" from_port="example set output" to_op="Optimize Parameters (Grid) (9)" to_port="input 1"/>
           <connect from_op="Optimize Parameters (Grid) (9)" from_port="performance" to_port="out 1"/>
           <connect from_op="Optimize Parameters (Grid) (9)" from_port="model" to_op="Apply Model (2)" to_port="model"/>
-          <connect from_op="Apply Model (2)" from_port="labelled data" to_op="KNN Test" to_port="labelled data"/>
-          <connect from_op="KNN Test" from_port="performance" to_op="Confusion Matrix to ExampleSet (2)" to_port="per"/>
+          <connect from_op="Apply Model (2)" from_port="labelled data" to_op="Performance Test Data (2)" to_port="labelled data"/>
+          <connect from_op="Performance Test Data (2)" from_port="performance" to_op="Confusion Matrix to ExampleSet (2)" to_port="per"/>
           <connect from_op="Confusion Matrix to ExampleSet (2)" from_port="exa" to_op="Generate Attributes (2)" to_port="example set input"/>
           <connect from_op="Confusion Matrix to ExampleSet (2)" from_port="ori" to_port="out 3"/>
           <connect from_op="Generate Attributes (2)" from_port="example set output" to_op="Store (2)" to_port="input"/>
@@ -645,7 +645,7 @@
                     <list key="application_parameters"/>
                     <parameter key="create_view" value="false"/>
                   </operator>
-                  <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Naive Train" width="90" x="246" y="34">
+                  <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Naive Bayes" width="90" x="246" y="34">
                     <parameter key="main_criterion" value="first"/>
                     <parameter key="accuracy" value="true"/>
                     <parameter key="classification_error" value="false"/>
@@ -674,9 +674,9 @@
                   </operator>
                   <connect from_port="model" to_op="Apply Model. (14)" to_port="model"/>
                   <connect from_port="test set" to_op="Apply Model. (14)" to_port="unlabelled data"/>
-                  <connect from_op="Apply Model. (14)" from_port="labelled data" to_op="Naive Train" to_port="labelled data"/>
-                  <connect from_op="Naive Train" from_port="performance" to_port="performance 1"/>
-                  <connect from_op="Naive Train" from_port="example set" to_port="test set results"/>
+                  <connect from_op="Apply Model. (14)" from_port="labelled data" to_op="Performance Naive Bayes" to_port="labelled data"/>
+                  <connect from_op="Performance Naive Bayes" from_port="performance" to_port="performance 1"/>
+                  <connect from_op="Performance Naive Bayes" from_port="example set" to_port="test set results"/>
                   <portSpacing port="source_model" spacing="0"/>
                   <portSpacing port="source_test set" spacing="0"/>
                   <portSpacing port="source_through 1" spacing="0"/>
@@ -698,13 +698,13 @@
               <portSpacing port="sink_output 2" spacing="0"/>
               <portSpacing port="sink_output 3" spacing="0"/>
             </process>
-            <description align="center" color="transparent" colored="false" width="126">KNN</description>
+            <description align="center" color="transparent" colored="false" width="126">Naive Bayes</description>
           </operator>
           <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model" width="90" x="581" y="289">
             <list key="application_parameters"/>
             <parameter key="create_view" value="false"/>
           </operator>
-          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Naive Test" width="90" x="715" y="289">
+          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data" width="90" x="715" y="289">
             <parameter key="main_criterion" value="first"/>
             <parameter key="accuracy" value="true"/>
             <parameter key="classification_error" value="false"/>
@@ -749,8 +749,8 @@
           <connect from_op="Select by Weights" from_port="example set output" to_op="Optimize Parameters (Grid) (8)" to_port="input 1"/>
           <connect from_op="Optimize Parameters (Grid) (8)" from_port="performance" to_port="out 1"/>
           <connect from_op="Optimize Parameters (Grid) (8)" from_port="model" to_op="Apply Model" to_port="model"/>
-          <connect from_op="Apply Model" from_port="labelled data" to_op="Naive Test" to_port="labelled data"/>
-          <connect from_op="Naive Test" from_port="performance" to_op="Confusion Matrix to ExampleSet" to_port="per"/>
+          <connect from_op="Apply Model" from_port="labelled data" to_op="Performance Test Data" to_port="labelled data"/>
+          <connect from_op="Performance Test Data" from_port="performance" to_op="Confusion Matrix to ExampleSet" to_port="per"/>
           <connect from_op="Confusion Matrix to ExampleSet" from_port="exa" to_op="Generate Attributes" to_port="example set input"/>
           <connect from_op="Confusion Matrix to ExampleSet" from_port="ori" to_port="out 3"/>
           <connect from_op="Generate Attributes" from_port="example set output" to_op="Store" to_port="input"/>
