@@ -773,13 +773,15 @@
         <list key="class_weights"/>
       </operator>
       <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet" width="90" x="1117" y="442"/>
-      <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="1251" y="442">
-        <parameter key="file_format" value="xlsx"/>
-        <enumeration key="sheet_names"/>
-        <parameter key="sheet_name" value="RapidMiner Data"/>
-        <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
-        <parameter key="number_format" value="#.0"/>
-        <parameter key="encoding" value="SYSTEM"/>
+      <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes" width="90" x="1251" y="442">
+        <list key="function_descriptions">
+          <parameter key="Data Basis" value="&quot;2 Grams&quot;"/>
+          <parameter key="Algorithm" value="&quot;Naive Bayes&quot;"/>
+        </list>
+        <parameter key="keep_all" value="true"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="1385" y="442">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Naive Bayes"/>
       </operator>
       <connect from_op="Retrieve 2 grams" from_port="output" to_op="Set Role (2)" to_port="example set input"/>
       <connect from_op="Set Role (2)" from_port="example set output" to_op="Select Attributes" to_port="example set input"/>
@@ -799,8 +801,9 @@
       <connect from_op="Optimize Parameters (Grid) (8)" from_port="model" to_op="Apply Model" to_port="model"/>
       <connect from_op="Apply Model" from_port="labelled data" to_op="Performance" to_port="labelled data"/>
       <connect from_op="Performance" from_port="performance" to_op="Confusion Matrix to ExampleSet" to_port="per"/>
-      <connect from_op="Confusion Matrix to ExampleSet" from_port="exa" to_op="Write Excel" to_port="input"/>
-      <connect from_op="Write Excel" from_port="through" to_port="result 3"/>
+      <connect from_op="Confusion Matrix to ExampleSet" from_port="exa" to_op="Generate Attributes" to_port="example set input"/>
+      <connect from_op="Generate Attributes" from_port="example set output" to_op="Store" to_port="input"/>
+      <connect from_op="Store" from_port="through" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
