@@ -161,8 +161,8 @@
       <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (3)" width="90" x="1318" y="289">
         <description align="center" color="transparent" colored="false" width="126">Union to get all data together</description>
       </operator>
-      <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="1452" y="136">
-        <parameter key="excel_file" value="G:/Meine Ablage/Project - BI- and Big-Data-Design Workshop.lnk/ingridients.xlsx"/>
+      <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="1452" y="340">
+        <parameter key="excel_file" value="G:/Meine Ablage/ingridients.xlsx"/>
         <parameter key="file_format" value="xlsx"/>
         <enumeration key="sheet_names">
           <parameter key="sheet_name_element" value="Handover_test"/>
