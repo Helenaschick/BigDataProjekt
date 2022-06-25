@@ -124,29 +124,470 @@
           <portSpacing port="sink_out 3" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="68" name="Trainings Data" width="90" x="380" y="136"/>
-      <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="68" name="Test Data" width="90" x="380" y="238"/>
-      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="k-NN (2)" width="90" x="715" y="238">
+      <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Trainings Data" width="90" x="380" y="136"/>
+      <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Test Data" width="90" x="380" y="238"/>
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Random Forest (2)" width="90" x="715" y="697">
         <process expanded="true">
-          <operator activated="true" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (2)" width="90" x="313" y="34">
-            <parameter key="normalize_weights" value="false"/>
-            <parameter key="sort_weights" value="true"/>
-            <parameter key="sort_direction" value="ascending"/>
-            <description align="center" color="transparent" colored="false" width="126">78% with naive</description>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro. (5)" width="90" x="179" y="34">
+            <process expanded="true">
+              <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (5)" width="90" x="313" y="238">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="C" value="0.0"/>
+              </operator>
+              <operator activated="false" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (9)" width="90" x="313" y="136">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+              </operator>
+              <operator activated="true" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation (5)" width="90" x="313" y="34">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="squared_correlation" value="false"/>
+              </operator>
+              <operator activated="false" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation (5)" width="90" x="313" y="340">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="normalize" value="none"/>
+              </operator>
+              <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (10)" width="90" x="581" y="34">
+                <parameter key="weight_relation" value="top p%"/>
+                <parameter key="weight" value="1.0"/>
+                <parameter key="k" value="10"/>
+                <parameter key="p" value="0.2"/>
+                <parameter key="deselect_unknown" value="true"/>
+                <parameter key="use_absolute_weights" value="true"/>
+              </operator>
+              <connect from_port="in 1" to_op="Weight by Correlation (5)" to_port="example set"/>
+              <connect from_op="Weight by Correlation (5)" from_port="weights" to_op="Select by Weights (10)" to_port="weights"/>
+              <connect from_op="Weight by Correlation (5)" from_port="example set" to_op="Select by Weights (10)" to_port="example set input"/>
+              <connect from_op="Select by Weights (10)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
           </operator>
-          <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (2)" width="90" x="447" y="34">
-            <parameter key="weight_relation" value="top k"/>
-            <parameter key="weight" value="1.0"/>
-            <parameter key="k" value="500"/>
-            <parameter key="p" value="0.5"/>
-            <parameter key="deselect_unknown" value="true"/>
-            <parameter key="use_absolute_weights" value="true"/>
+          <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (6)" width="90" x="380" y="34">
+            <list key="parameters">
+              <parameter key="Random Forest.number_of_trees" value="[10;100;9;linear]"/>
+              <parameter key="Random Forest.criterion" value="gain_ratio,information_gain,gini_index,accuracy"/>
+              <parameter key="Random Forest.maximal_depth" value="[10;100;9;linear]"/>
+              <parameter key="Cross Validation (7).number_of_folds" value="[5;15;15;linear]"/>
+            </list>
+            <parameter key="error_handling" value="fail on error"/>
+            <parameter key="log_performance" value="true"/>
+            <parameter key="log_all_criteria" value="false"/>
+            <parameter key="synchronize" value="false"/>
+            <parameter key="enable_parallel_execution" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation (7)" width="90" x="179" y="34">
+                <parameter key="split_on_batch_attribute" value="false"/>
+                <parameter key="leave_one_out" value="false"/>
+                <parameter key="number_of_folds" value="10"/>
+                <parameter key="sampling_type" value="automatic"/>
+                <parameter key="use_local_random_seed" value="false"/>
+                <parameter key="local_random_seed" value="1992"/>
+                <parameter key="enable_parallel_execution" value="true"/>
+                <process expanded="true">
+                  <operator activated="true" class="concurrency:parallel_random_forest" compatibility="9.10.008" expanded="true" height="103" name="Random Forest" width="90" x="246" y="34">
+                    <parameter key="number_of_trees" value="40"/>
+                    <parameter key="criterion" value="gain_ratio"/>
+                    <parameter key="maximal_depth" value="10"/>
+                    <parameter key="apply_pruning" value="false"/>
+                    <parameter key="confidence" value="0.1"/>
+                    <parameter key="apply_prepruning" value="false"/>
+                    <parameter key="minimal_gain" value="0.01"/>
+                    <parameter key="minimal_leaf_size" value="2"/>
+                    <parameter key="minimal_size_for_split" value="4"/>
+                    <parameter key="number_of_prepruning_alternatives" value="3"/>
+                    <parameter key="random_splits" value="false"/>
+                    <parameter key="guess_subset_ratio" value="true"/>
+                    <parameter key="subset_ratio" value="0.2"/>
+                    <parameter key="voting_strategy" value="confidence vote"/>
+                    <parameter key="use_local_random_seed" value="false"/>
+                    <parameter key="local_random_seed" value="1992"/>
+                    <parameter key="enable_parallel_execution" value="true"/>
+                  </operator>
+                  <connect from_port="training set" to_op="Random Forest" to_port="training set"/>
+                  <connect from_op="Random Forest" from_port="model" to_port="model"/>
+                  <portSpacing port="source_training set" spacing="0"/>
+                  <portSpacing port="sink_model" spacing="0"/>
+                  <portSpacing port="sink_through 1" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model. (7)" width="90" x="112" y="34">
+                    <list key="application_parameters"/>
+                    <parameter key="create_view" value="false"/>
+                  </operator>
+                  <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Random Forest" width="90" x="246" y="34">
+                    <parameter key="main_criterion" value="first"/>
+                    <parameter key="accuracy" value="true"/>
+                    <parameter key="classification_error" value="false"/>
+                    <parameter key="kappa" value="false"/>
+                    <parameter key="weighted_mean_recall" value="false"/>
+                    <parameter key="weighted_mean_precision" value="false"/>
+                    <parameter key="spearman_rho" value="false"/>
+                    <parameter key="kendall_tau" value="false"/>
+                    <parameter key="absolute_error" value="false"/>
+                    <parameter key="relative_error" value="false"/>
+                    <parameter key="relative_error_lenient" value="false"/>
+                    <parameter key="relative_error_strict" value="false"/>
+                    <parameter key="normalized_absolute_error" value="false"/>
+                    <parameter key="root_mean_squared_error" value="false"/>
+                    <parameter key="root_relative_squared_error" value="false"/>
+                    <parameter key="squared_error" value="false"/>
+                    <parameter key="correlation" value="false"/>
+                    <parameter key="squared_correlation" value="false"/>
+                    <parameter key="cross-entropy" value="false"/>
+                    <parameter key="margin" value="false"/>
+                    <parameter key="soft_margin_loss" value="false"/>
+                    <parameter key="logistic_loss" value="false"/>
+                    <parameter key="skip_undefined_labels" value="true"/>
+                    <parameter key="use_example_weights" value="true"/>
+                    <list key="class_weights"/>
+                  </operator>
+                  <connect from_port="model" to_op="Apply Model. (7)" to_port="model"/>
+                  <connect from_port="test set" to_op="Apply Model. (7)" to_port="unlabelled data"/>
+                  <connect from_op="Apply Model. (7)" from_port="labelled data" to_op="Performance Random Forest" to_port="labelled data"/>
+                  <connect from_op="Performance Random Forest" from_port="performance" to_port="performance 1"/>
+                  <connect from_op="Performance Random Forest" from_port="example set" to_port="test set results"/>
+                  <portSpacing port="source_model" spacing="0"/>
+                  <portSpacing port="source_test set" spacing="0"/>
+                  <portSpacing port="source_through 1" spacing="0"/>
+                  <portSpacing port="sink_test set results" spacing="0"/>
+                  <portSpacing port="sink_performance 1" spacing="0"/>
+                  <portSpacing port="sink_performance 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_port="input 1" to_op="Cross Validation (7)" to_port="example set"/>
+              <connect from_op="Cross Validation (7)" from_port="model" to_port="model"/>
+              <connect from_op="Cross Validation (7)" from_port="performance 1" to_port="performance"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="source_input 2" spacing="0"/>
+              <portSpacing port="sink_performance" spacing="0"/>
+              <portSpacing port="sink_model" spacing="0"/>
+              <portSpacing port="sink_output 1" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">Random Forest&lt;br&gt;</description>
+          </operator>
+          <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model (6)" width="90" x="246" y="289">
+            <list key="application_parameters"/>
+            <parameter key="create_view" value="false"/>
+          </operator>
+          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data (5)" width="90" x="380" y="289">
+            <parameter key="main_criterion" value="first"/>
+            <parameter key="accuracy" value="true"/>
+            <parameter key="classification_error" value="true"/>
+            <parameter key="kappa" value="true"/>
+            <parameter key="weighted_mean_recall" value="true"/>
+            <parameter key="weighted_mean_precision" value="true"/>
+            <parameter key="spearman_rho" value="true"/>
+            <parameter key="kendall_tau" value="true"/>
+            <parameter key="absolute_error" value="true"/>
+            <parameter key="relative_error" value="true"/>
+            <parameter key="relative_error_lenient" value="true"/>
+            <parameter key="relative_error_strict" value="true"/>
+            <parameter key="normalized_absolute_error" value="true"/>
+            <parameter key="root_mean_squared_error" value="true"/>
+            <parameter key="root_relative_squared_error" value="true"/>
+            <parameter key="squared_error" value="true"/>
+            <parameter key="correlation" value="true"/>
+            <parameter key="squared_correlation" value="true"/>
+            <parameter key="cross-entropy" value="true"/>
+            <parameter key="margin" value="true"/>
+            <parameter key="soft_margin_loss" value="true"/>
+            <parameter key="logistic_loss" value="true"/>
+            <parameter key="skip_undefined_labels" value="true"/>
+            <parameter key="use_example_weights" value="true"/>
+            <list key="class_weights"/>
+          </operator>
+          <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet (5)" width="90" x="514" y="289"/>
+          <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes (5)" width="90" x="648" y="289">
+            <list key="function_descriptions">
+              <parameter key="Data Basis" value="&quot;Single Token&quot;"/>
+              <parameter key="Algorithm" value="&quot;Random Forest&quot;"/>
+            </list>
+            <parameter key="keep_all" value="true"/>
+          </operator>
+          <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (5)" width="90" x="782" y="289">
+            <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Random Forest"/>
+          </operator>
+          <connect from_port="in 1" to_op="Optimize Parameters (Grid) (6)" to_port="input 1"/>
+          <connect from_port="in 2" to_op="Apply Model (6)" to_port="unlabelled data"/>
+          <connect from_op="Optimize Parameters (Grid) (6)" from_port="performance" to_port="out 3"/>
+          <connect from_op="Optimize Parameters (Grid) (6)" from_port="model" to_op="Apply Model (6)" to_port="model"/>
+          <connect from_op="Apply Model (6)" from_port="labelled data" to_op="Performance Test Data (5)" to_port="labelled data"/>
+          <connect from_op="Performance Test Data (5)" from_port="performance" to_op="Confusion Matrix to ExampleSet (5)" to_port="per"/>
+          <connect from_op="Confusion Matrix to ExampleSet (5)" from_port="exa" to_op="Generate Attributes (5)" to_port="example set input"/>
+          <connect from_op="Confusion Matrix to ExampleSet (5)" from_port="ori" to_port="out 2"/>
+          <connect from_op="Generate Attributes (5)" from_port="example set output" to_op="Store (5)" to_port="input"/>
+          <connect from_op="Store (5)" from_port="through" to_port="out 1"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="source_in 3" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <portSpacing port="sink_out 3" spacing="0"/>
+          <portSpacing port="sink_out 4" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Decision Tree" width="90" x="715" y="544">
+        <process expanded="true">
+          <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro. (4)" width="90" x="246" y="34">
+            <process expanded="true">
+              <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (4)" width="90" x="313" y="238">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="C" value="0.0"/>
+              </operator>
+              <operator activated="false" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (8)" width="90" x="313" y="136">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+              </operator>
+              <operator activated="true" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation (4)" width="90" x="313" y="34">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="squared_correlation" value="false"/>
+              </operator>
+              <operator activated="false" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation" width="90" x="313" y="340">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="normalize" value="none"/>
+              </operator>
+              <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (9)" width="90" x="581" y="34">
+                <parameter key="weight_relation" value="top p%"/>
+                <parameter key="weight" value="1.0"/>
+                <parameter key="k" value="10"/>
+                <parameter key="p" value="0.2"/>
+                <parameter key="deselect_unknown" value="true"/>
+                <parameter key="use_absolute_weights" value="true"/>
+              </operator>
+              <connect from_port="in 1" to_op="Weight by Correlation (4)" to_port="example set"/>
+              <connect from_op="Weight by Correlation (4)" from_port="weights" to_op="Select by Weights (9)" to_port="weights"/>
+              <connect from_op="Weight by Correlation (4)" from_port="example set" to_op="Select by Weights (9)" to_port="example set input"/>
+              <connect from_op="Select by Weights (9)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid)" width="90" x="581" y="34">
+            <list key="parameters">
+              <parameter key="Cross Validation (2).number_of_folds" value="[5;15;15;linear]"/>
+              <parameter key="Model Decision Tree.maximal_depth" value="[10;100;30;linear]"/>
+              <parameter key="Model Decision Tree.criterion" value="gain_ratio,information_gain,gini_index,accuracy"/>
+              <parameter key="Model Decision Tree.minimal_gain" value="[0.01;1;15;linear]"/>
+            </list>
+            <parameter key="error_handling" value="fail on error"/>
+            <parameter key="log_performance" value="true"/>
+            <parameter key="log_all_criteria" value="false"/>
+            <parameter key="synchronize" value="false"/>
+            <parameter key="enable_parallel_execution" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation (2)" width="90" x="112" y="34">
+                <parameter key="split_on_batch_attribute" value="false"/>
+                <parameter key="leave_one_out" value="false"/>
+                <parameter key="number_of_folds" value="10"/>
+                <parameter key="sampling_type" value="automatic"/>
+                <parameter key="use_local_random_seed" value="false"/>
+                <parameter key="local_random_seed" value="1992"/>
+                <parameter key="enable_parallel_execution" value="true"/>
+                <process expanded="true">
+                  <operator activated="true" class="concurrency:parallel_decision_tree" compatibility="9.10.008" expanded="true" height="103" name="Model Decision Tree" width="90" x="179" y="34">
+                    <parameter key="criterion" value="gini_index"/>
+                    <parameter key="maximal_depth" value="10"/>
+                    <parameter key="apply_pruning" value="true"/>
+                    <parameter key="confidence" value="0.1"/>
+                    <parameter key="apply_prepruning" value="true"/>
+                    <parameter key="minimal_gain" value="0.01"/>
+                    <parameter key="minimal_leaf_size" value="2"/>
+                    <parameter key="minimal_size_for_split" value="4"/>
+                    <parameter key="number_of_prepruning_alternatives" value="3"/>
+                  </operator>
+                  <connect from_port="training set" to_op="Model Decision Tree" to_port="training set"/>
+                  <connect from_op="Model Decision Tree" from_port="model" to_port="model"/>
+                  <portSpacing port="source_training set" spacing="0"/>
+                  <portSpacing port="sink_model" spacing="0"/>
+                  <portSpacing port="sink_through 1" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model." width="90" x="112" y="34">
+                    <list key="application_parameters"/>
+                    <parameter key="create_view" value="false"/>
+                  </operator>
+                  <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance (2)" width="90" x="246" y="34">
+                    <parameter key="main_criterion" value="first"/>
+                    <parameter key="accuracy" value="true"/>
+                    <parameter key="classification_error" value="false"/>
+                    <parameter key="kappa" value="false"/>
+                    <parameter key="weighted_mean_recall" value="false"/>
+                    <parameter key="weighted_mean_precision" value="false"/>
+                    <parameter key="spearman_rho" value="false"/>
+                    <parameter key="kendall_tau" value="false"/>
+                    <parameter key="absolute_error" value="false"/>
+                    <parameter key="relative_error" value="false"/>
+                    <parameter key="relative_error_lenient" value="false"/>
+                    <parameter key="relative_error_strict" value="false"/>
+                    <parameter key="normalized_absolute_error" value="false"/>
+                    <parameter key="root_mean_squared_error" value="false"/>
+                    <parameter key="root_relative_squared_error" value="false"/>
+                    <parameter key="squared_error" value="false"/>
+                    <parameter key="correlation" value="false"/>
+                    <parameter key="squared_correlation" value="false"/>
+                    <parameter key="cross-entropy" value="false"/>
+                    <parameter key="margin" value="false"/>
+                    <parameter key="soft_margin_loss" value="false"/>
+                    <parameter key="logistic_loss" value="false"/>
+                    <parameter key="skip_undefined_labels" value="true"/>
+                    <parameter key="use_example_weights" value="true"/>
+                    <list key="class_weights"/>
+                  </operator>
+                  <connect from_port="model" to_op="Apply Model." to_port="model"/>
+                  <connect from_port="test set" to_op="Apply Model." to_port="unlabelled data"/>
+                  <connect from_op="Apply Model." from_port="labelled data" to_op="Performance (2)" to_port="labelled data"/>
+                  <connect from_op="Performance (2)" from_port="performance" to_port="performance 1"/>
+                  <connect from_op="Performance (2)" from_port="example set" to_port="test set results"/>
+                  <portSpacing port="source_model" spacing="0"/>
+                  <portSpacing port="source_test set" spacing="0"/>
+                  <portSpacing port="source_through 1" spacing="0"/>
+                  <portSpacing port="sink_test set results" spacing="0"/>
+                  <portSpacing port="sink_performance 1" spacing="0"/>
+                  <portSpacing port="sink_performance 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_port="input 1" to_op="Cross Validation (2)" to_port="example set"/>
+              <connect from_op="Cross Validation (2)" from_port="model" to_port="model"/>
+              <connect from_op="Cross Validation (2)" from_port="performance 1" to_port="performance"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="source_input 2" spacing="0"/>
+              <portSpacing port="sink_performance" spacing="0"/>
+              <portSpacing port="sink_model" spacing="0"/>
+              <portSpacing port="sink_output 1" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">Decision Tree</description>
+          </operator>
+          <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model (5)" width="90" x="380" y="238">
+            <list key="application_parameters"/>
+            <parameter key="create_view" value="false"/>
+          </operator>
+          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data (4)" width="90" x="514" y="238">
+            <parameter key="main_criterion" value="first"/>
+            <parameter key="accuracy" value="true"/>
+            <parameter key="classification_error" value="true"/>
+            <parameter key="kappa" value="true"/>
+            <parameter key="weighted_mean_recall" value="true"/>
+            <parameter key="weighted_mean_precision" value="true"/>
+            <parameter key="spearman_rho" value="true"/>
+            <parameter key="kendall_tau" value="true"/>
+            <parameter key="absolute_error" value="true"/>
+            <parameter key="relative_error" value="true"/>
+            <parameter key="relative_error_lenient" value="true"/>
+            <parameter key="relative_error_strict" value="true"/>
+            <parameter key="normalized_absolute_error" value="true"/>
+            <parameter key="root_mean_squared_error" value="true"/>
+            <parameter key="root_relative_squared_error" value="true"/>
+            <parameter key="squared_error" value="true"/>
+            <parameter key="correlation" value="true"/>
+            <parameter key="squared_correlation" value="true"/>
+            <parameter key="cross-entropy" value="true"/>
+            <parameter key="margin" value="true"/>
+            <parameter key="soft_margin_loss" value="true"/>
+            <parameter key="logistic_loss" value="true"/>
+            <parameter key="skip_undefined_labels" value="true"/>
+            <parameter key="use_example_weights" value="true"/>
+            <list key="class_weights"/>
+          </operator>
+          <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet (4)" width="90" x="648" y="238"/>
+          <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes (4)" width="90" x="782" y="238">
+            <list key="function_descriptions">
+              <parameter key="Data Basis" value="&quot;Single Token&quot;"/>
+              <parameter key="Algorithm" value="&quot;Decision Tree&quot;"/>
+            </list>
+            <parameter key="keep_all" value="true"/>
+          </operator>
+          <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (4)" width="90" x="916" y="238">
+            <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Decision Tree"/>
+          </operator>
+          <connect from_port="in 1" to_op="Data Prepro. (4)" to_port="in 1"/>
+          <connect from_port="in 2" to_op="Apply Model (5)" to_port="unlabelled data"/>
+          <connect from_op="Data Prepro. (4)" from_port="out 1" to_op="Optimize Parameters (Grid)" to_port="input 1"/>
+          <connect from_op="Optimize Parameters (Grid)" from_port="performance" to_port="out 1"/>
+          <connect from_op="Optimize Parameters (Grid)" from_port="model" to_op="Apply Model (5)" to_port="model"/>
+          <connect from_op="Apply Model (5)" from_port="labelled data" to_op="Performance Test Data (4)" to_port="labelled data"/>
+          <connect from_op="Performance Test Data (4)" from_port="performance" to_op="Confusion Matrix to ExampleSet (4)" to_port="per"/>
+          <connect from_op="Confusion Matrix to ExampleSet (4)" from_port="exa" to_op="Generate Attributes (4)" to_port="example set input"/>
+          <connect from_op="Confusion Matrix to ExampleSet (4)" from_port="ori" to_port="out 3"/>
+          <connect from_op="Generate Attributes (4)" from_port="example set output" to_op="Store (4)" to_port="input"/>
+          <connect from_op="Store (4)" from_port="through" to_port="out 2"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="source_in 3" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <portSpacing port="sink_out 3" spacing="0"/>
+          <portSpacing port="sink_out 4" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="k-NN (2)" width="90" x="715" y="238">
+        <process expanded="true">
+          <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro. (2)" width="90" x="380" y="34">
+            <process expanded="true">
+              <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (2)" width="90" x="313" y="238">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="C" value="0.0"/>
+              </operator>
+              <operator activated="false" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (7)" width="90" x="313" y="136">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+              </operator>
+              <operator activated="false" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation (2)" width="90" x="313" y="34">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="squared_correlation" value="false"/>
+              </operator>
+              <operator activated="true" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation (3)" width="90" x="313" y="340">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="normalize" value="none"/>
+              </operator>
+              <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (7)" width="90" x="581" y="34">
+                <parameter key="weight_relation" value="top p%"/>
+                <parameter key="weight" value="1.0"/>
+                <parameter key="k" value="10"/>
+                <parameter key="p" value="0.5"/>
+                <parameter key="deselect_unknown" value="true"/>
+                <parameter key="use_absolute_weights" value="true"/>
+              </operator>
+              <connect from_port="in 1" to_op="Weight by Deviation (3)" to_port="example set"/>
+              <connect from_op="Weight by Deviation (3)" from_port="weights" to_op="Select by Weights (7)" to_port="weights"/>
+              <connect from_op="Weight by Deviation (3)" from_port="example set" to_op="Select by Weights (7)" to_port="example set input"/>
+              <connect from_op="Select by Weights (7)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
           </operator>
           <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="Subprocess" width="90" x="581" y="34">
             <process expanded="true">
               <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (5)" width="90" x="112" y="34">
                 <list key="parameters">
-                  <parameter key="k-NN.k" value="[30;50;20;linear]"/>
+                  <parameter key="k-NN.k" value="[20;150;150;linear]"/>
+                  <parameter key="k-NN.numerical_measure" value="EuclideanDistance,ManhattanDistance"/>
                 </list>
                 <parameter key="error_handling" value="fail on error"/>
                 <parameter key="log_performance" value="true"/>
@@ -155,9 +596,9 @@
                 <parameter key="enable_parallel_execution" value="true"/>
                 <process expanded="true">
                   <operator activated="true" class="k_nn" compatibility="9.10.008" expanded="true" height="82" name="k-NN" width="90" x="179" y="34">
-                    <parameter key="k" value="5"/>
+                    <parameter key="k" value="0"/>
                     <parameter key="weighted_vote" value="true"/>
-                    <parameter key="measure_types" value="MixedMeasures"/>
+                    <parameter key="measure_types" value="NumericalMeasures"/>
                     <parameter key="mixed_measure" value="MixedEuclideanDistance"/>
                     <parameter key="nominal_measure" value="NominalDistance"/>
                     <parameter key="numerical_measure" value="EuclideanDistance"/>
@@ -231,7 +672,7 @@
             <list key="application_parameters"/>
             <parameter key="create_view" value="false"/>
           </operator>
-          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data (2)" width="90" x="782" y="34">
+          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data (2)" width="90" x="782" y="187">
             <parameter key="main_criterion" value="first"/>
             <parameter key="accuracy" value="true"/>
             <parameter key="classification_error" value="true"/>
@@ -258,7 +699,7 @@
             <parameter key="use_example_weights" value="true"/>
             <list key="class_weights"/>
           </operator>
-          <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet (2)" width="90" x="916" y="34"/>
+          <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet (2)" width="90" x="916" y="187"/>
           <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes (2)" width="90" x="1050" y="34">
             <list key="function_descriptions">
               <parameter key="Data Basis" value="&quot;Single Token&quot;"/>
@@ -269,12 +710,11 @@
           <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (2)" width="90" x="1184" y="34">
             <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_k-NN"/>
           </operator>
-          <connect from_port="in 1" to_op="Weight by Gini Index (2)" to_port="example set"/>
+          <connect from_port="in 1" to_op="Data Prepro. (2)" to_port="in 1"/>
           <connect from_port="in 2" to_op="Apply Model (2)" to_port="unlabelled data"/>
-          <connect from_op="Weight by Gini Index (2)" from_port="weights" to_op="Select by Weights (2)" to_port="weights"/>
-          <connect from_op="Weight by Gini Index (2)" from_port="example set" to_op="Select by Weights (2)" to_port="example set input"/>
-          <connect from_op="Select by Weights (2)" from_port="example set output" to_op="Subprocess" to_port="in 1"/>
-          <connect from_op="Subprocess" from_port="out 1" to_op="Apply Model (2)" to_port="model"/>
+          <connect from_op="Data Prepro. (2)" from_port="out 1" to_op="Subprocess" to_port="in 1"/>
+          <connect from_op="Subprocess" from_port="out 1" to_port="out 3"/>
+          <connect from_op="Subprocess" from_port="out 2" to_op="Apply Model (2)" to_port="model"/>
           <connect from_op="Apply Model (2)" from_port="labelled data" to_op="Performance Test Data (2)" to_port="labelled data"/>
           <connect from_op="Performance Test Data (2)" from_port="performance" to_op="Confusion Matrix to ExampleSet (2)" to_port="per"/>
           <connect from_op="Confusion Matrix to ExampleSet (2)" from_port="exa" to_op="Generate Attributes (2)" to_port="example set input"/>
@@ -287,27 +727,57 @@
           <portSpacing port="sink_out 1" spacing="0"/>
           <portSpacing port="sink_out 2" spacing="0"/>
           <portSpacing port="sink_out 3" spacing="0"/>
+          <portSpacing port="sink_out 4" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Naive Bayes (2)" width="90" x="715" y="85">
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Naive Bayes (2)" width="90" x="715" y="85">
         <process expanded="true">
-          <operator activated="true" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index" width="90" x="380" y="34">
-            <parameter key="normalize_weights" value="false"/>
-            <parameter key="sort_weights" value="true"/>
-            <parameter key="sort_direction" value="ascending"/>
-            <description align="center" color="transparent" colored="false" width="126">78% with naive</description>
+          <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro." width="90" x="246" y="34">
+            <process expanded="true">
+              <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM" width="90" x="313" y="238">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="C" value="0.0"/>
+              </operator>
+              <operator activated="false" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (2)" width="90" x="313" y="136">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+              </operator>
+              <operator activated="false" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation" width="90" x="313" y="34">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="squared_correlation" value="false"/>
+              </operator>
+              <operator activated="true" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation (2)" width="90" x="313" y="340">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="normalize" value="none"/>
+              </operator>
+              <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights" width="90" x="581" y="34">
+                <parameter key="weight_relation" value="top p%"/>
+                <parameter key="weight" value="1.0"/>
+                <parameter key="k" value="10"/>
+                <parameter key="p" value="0.2"/>
+                <parameter key="deselect_unknown" value="true"/>
+                <parameter key="use_absolute_weights" value="true"/>
+              </operator>
+              <connect from_port="in 1" to_op="Weight by Deviation (2)" to_port="example set"/>
+              <connect from_op="Weight by Deviation (2)" from_port="weights" to_op="Select by Weights" to_port="weights"/>
+              <connect from_op="Weight by Deviation (2)" from_port="example set" to_op="Select by Weights" to_port="example set input"/>
+              <connect from_op="Select by Weights" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
           </operator>
-          <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights" width="90" x="514" y="34">
-            <parameter key="weight_relation" value="top k"/>
-            <parameter key="weight" value="1.0"/>
-            <parameter key="k" value="500"/>
-            <parameter key="p" value="0.5"/>
-            <parameter key="deselect_unknown" value="true"/>
-            <parameter key="use_absolute_weights" value="true"/>
-          </operator>
-          <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (8)" width="90" x="715" y="34">
+          <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (8)" width="90" x="581" y="34">
             <list key="parameters">
-              <parameter key="Cross Validation (12).number_of_folds" value="[5;10;5;linear]"/>
+              <parameter key="Cross Validation (12).number_of_folds" value="[5;15;15;linear]"/>
             </list>
             <parameter key="error_handling" value="fail on error"/>
             <parameter key="log_performance" value="true"/>
@@ -389,11 +859,11 @@
             </process>
             <description align="center" color="transparent" colored="false" width="126">Naive Bayes</description>
           </operator>
-          <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model" width="90" x="447" y="289">
+          <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model" width="90" x="313" y="391">
             <list key="application_parameters"/>
             <parameter key="create_view" value="false"/>
           </operator>
-          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data" width="90" x="581" y="289">
+          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data" width="90" x="447" y="391">
             <parameter key="main_criterion" value="first"/>
             <parameter key="accuracy" value="true"/>
             <parameter key="classification_error" value="true"/>
@@ -420,22 +890,20 @@
             <parameter key="use_example_weights" value="true"/>
             <list key="class_weights"/>
           </operator>
-          <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet" width="90" x="715" y="289"/>
-          <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes" width="90" x="849" y="289">
+          <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet" width="90" x="581" y="391"/>
+          <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes" width="90" x="715" y="391">
             <list key="function_descriptions">
               <parameter key="Data Basis" value="&quot;Single Token&quot;"/>
               <parameter key="Algorithm" value="&quot;Naive Bayes&quot;"/>
             </list>
             <parameter key="keep_all" value="true"/>
           </operator>
-          <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="983" y="289">
+          <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store" width="90" x="849" y="391">
             <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Naive Bayes"/>
           </operator>
-          <connect from_port="in 1" to_op="Weight by Gini Index" to_port="example set"/>
+          <connect from_port="in 1" to_op="Data Prepro." to_port="in 1"/>
           <connect from_port="in 2" to_op="Apply Model" to_port="unlabelled data"/>
-          <connect from_op="Weight by Gini Index" from_port="weights" to_op="Select by Weights" to_port="weights"/>
-          <connect from_op="Weight by Gini Index" from_port="example set" to_op="Select by Weights" to_port="example set input"/>
-          <connect from_op="Select by Weights" from_port="example set output" to_op="Optimize Parameters (Grid) (8)" to_port="input 1"/>
+          <connect from_op="Data Prepro." from_port="out 1" to_op="Optimize Parameters (Grid) (8)" to_port="input 1"/>
           <connect from_op="Optimize Parameters (Grid) (8)" from_port="performance" to_port="out 1"/>
           <connect from_op="Optimize Parameters (Grid) (8)" from_port="model" to_op="Apply Model" to_port="model"/>
           <connect from_op="Apply Model" from_port="labelled data" to_op="Performance Test Data" to_port="labelled data"/>
@@ -453,11 +921,54 @@
           <portSpacing port="sink_out 4" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="68" name="Neural Net (2)" width="90" x="715" y="391">
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Neural Net (2)" width="90" x="715" y="391">
         <process expanded="true">
+          <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro. (3)" width="90" x="246" y="34">
+            <process expanded="true">
+              <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (3)" width="90" x="313" y="238">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="C" value="0.0"/>
+              </operator>
+              <operator activated="false" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index" width="90" x="313" y="136">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+              </operator>
+              <operator activated="false" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation (3)" width="90" x="313" y="34">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="squared_correlation" value="false"/>
+              </operator>
+              <operator activated="true" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation (4)" width="90" x="313" y="340">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="normalize" value="none"/>
+              </operator>
+              <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (8)" width="90" x="581" y="34">
+                <parameter key="weight_relation" value="top p%"/>
+                <parameter key="weight" value="1.0"/>
+                <parameter key="k" value="10"/>
+                <parameter key="p" value="0.2"/>
+                <parameter key="deselect_unknown" value="true"/>
+                <parameter key="use_absolute_weights" value="true"/>
+              </operator>
+              <connect from_port="in 1" to_op="Weight by Deviation (4)" to_port="example set"/>
+              <connect from_op="Weight by Deviation (4)" from_port="weights" to_op="Select by Weights (8)" to_port="weights"/>
+              <connect from_op="Weight by Deviation (4)" from_port="example set" to_op="Select by Weights (8)" to_port="example set input"/>
+              <connect from_op="Select by Weights (8)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+          </operator>
           <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (7)" width="90" x="514" y="34">
             <list key="parameters">
-              <parameter key="Cross Validation (11).sampling_type" value="automatic"/>
+              <parameter key="Cross Validation (11).number_of_folds" value="[5;15;15;linear]"/>
             </list>
             <parameter key="error_handling" value="fail on error"/>
             <parameter key="log_performance" value="true"/>
@@ -590,362 +1101,75 @@
           <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (3)" width="90" x="916" y="340">
             <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Neural Net"/>
           </operator>
-          <operator activated="true" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (3)" width="90" x="179" y="34">
-            <parameter key="normalize_weights" value="false"/>
-            <parameter key="sort_weights" value="true"/>
-            <parameter key="sort_direction" value="ascending"/>
-            <description align="center" color="transparent" colored="false" width="126">78% with naive</description>
-          </operator>
-          <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (3)" width="90" x="313" y="34">
-            <parameter key="weight_relation" value="top k"/>
-            <parameter key="weight" value="1.0"/>
-            <parameter key="k" value="500"/>
-            <parameter key="p" value="0.5"/>
-            <parameter key="deselect_unknown" value="true"/>
-            <parameter key="use_absolute_weights" value="true"/>
-          </operator>
+          <connect from_port="in 1" to_op="Data Prepro. (3)" to_port="in 1"/>
+          <connect from_port="in 2" to_op="Apply Model (3)" to_port="unlabelled data"/>
+          <connect from_op="Data Prepro. (3)" from_port="out 1" to_op="Optimize Parameters (Grid) (7)" to_port="input 1"/>
+          <connect from_op="Optimize Parameters (Grid) (7)" from_port="performance" to_port="out 3"/>
+          <connect from_op="Optimize Parameters (Grid) (7)" from_port="model" to_op="Apply Model (3)" to_port="model"/>
           <connect from_op="Apply Model (3)" from_port="labelled data" to_op="Performance Test Data (3)" to_port="labelled data"/>
           <connect from_op="Performance Test Data (3)" from_port="performance" to_op="Confusion Matrix to ExampleSet (3)" to_port="per"/>
           <connect from_op="Confusion Matrix to ExampleSet (3)" from_port="exa" to_op="Generate Attributes (3)" to_port="example set input"/>
+          <connect from_op="Confusion Matrix to ExampleSet (3)" from_port="ori" to_port="out 2"/>
           <connect from_op="Generate Attributes (3)" from_port="example set output" to_op="Store (3)" to_port="input"/>
-          <connect from_op="Weight by Gini Index (3)" from_port="weights" to_op="Select by Weights (3)" to_port="weights"/>
-          <connect from_op="Weight by Gini Index (3)" from_port="example set" to_op="Select by Weights (3)" to_port="example set input"/>
+          <connect from_op="Store (3)" from_port="through" to_port="out 1"/>
           <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="source_in 3" spacing="0"/>
           <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <portSpacing port="sink_out 3" spacing="0"/>
+          <portSpacing port="sink_out 4" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="68" name="Decision Tree" width="90" x="715" y="493">
+      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Gradient Boosted Tree" width="90" x="715" y="850">
         <process expanded="true">
-          <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid)" width="90" x="447" y="34">
-            <list key="parameters">
-              <parameter key="Model Decision Tree.maximal_depth" value="[40;41;2;linear]"/>
-            </list>
-            <parameter key="error_handling" value="fail on error"/>
-            <parameter key="log_performance" value="true"/>
-            <parameter key="log_all_criteria" value="false"/>
-            <parameter key="synchronize" value="false"/>
-            <parameter key="enable_parallel_execution" value="true"/>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro. (6)" width="90" x="179" y="34">
             <process expanded="true">
-              <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation (2)" width="90" x="112" y="34">
-                <parameter key="split_on_batch_attribute" value="false"/>
-                <parameter key="leave_one_out" value="false"/>
-                <parameter key="number_of_folds" value="10"/>
-                <parameter key="sampling_type" value="automatic"/>
-                <parameter key="use_local_random_seed" value="false"/>
-                <parameter key="local_random_seed" value="1992"/>
-                <parameter key="enable_parallel_execution" value="true"/>
-                <process expanded="true">
-                  <operator activated="true" class="concurrency:parallel_decision_tree" compatibility="9.10.008" expanded="true" height="103" name="Model Decision Tree" width="90" x="179" y="34">
-                    <parameter key="criterion" value="gini_index"/>
-                    <parameter key="maximal_depth" value="10"/>
-                    <parameter key="apply_pruning" value="true"/>
-                    <parameter key="confidence" value="0.1"/>
-                    <parameter key="apply_prepruning" value="true"/>
-                    <parameter key="minimal_gain" value="0.01"/>
-                    <parameter key="minimal_leaf_size" value="2"/>
-                    <parameter key="minimal_size_for_split" value="4"/>
-                    <parameter key="number_of_prepruning_alternatives" value="3"/>
-                  </operator>
-                  <connect from_port="training set" to_op="Model Decision Tree" to_port="training set"/>
-                  <connect from_op="Model Decision Tree" from_port="model" to_port="model"/>
-                  <portSpacing port="source_training set" spacing="0"/>
-                  <portSpacing port="sink_model" spacing="0"/>
-                  <portSpacing port="sink_through 1" spacing="0"/>
-                </process>
-                <process expanded="true">
-                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model." width="90" x="112" y="34">
-                    <list key="application_parameters"/>
-                    <parameter key="create_view" value="false"/>
-                  </operator>
-                  <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance (2)" width="90" x="246" y="34">
-                    <parameter key="main_criterion" value="first"/>
-                    <parameter key="accuracy" value="true"/>
-                    <parameter key="classification_error" value="false"/>
-                    <parameter key="kappa" value="false"/>
-                    <parameter key="weighted_mean_recall" value="false"/>
-                    <parameter key="weighted_mean_precision" value="false"/>
-                    <parameter key="spearman_rho" value="false"/>
-                    <parameter key="kendall_tau" value="false"/>
-                    <parameter key="absolute_error" value="false"/>
-                    <parameter key="relative_error" value="false"/>
-                    <parameter key="relative_error_lenient" value="false"/>
-                    <parameter key="relative_error_strict" value="false"/>
-                    <parameter key="normalized_absolute_error" value="false"/>
-                    <parameter key="root_mean_squared_error" value="false"/>
-                    <parameter key="root_relative_squared_error" value="false"/>
-                    <parameter key="squared_error" value="false"/>
-                    <parameter key="correlation" value="false"/>
-                    <parameter key="squared_correlation" value="false"/>
-                    <parameter key="cross-entropy" value="false"/>
-                    <parameter key="margin" value="false"/>
-                    <parameter key="soft_margin_loss" value="false"/>
-                    <parameter key="logistic_loss" value="false"/>
-                    <parameter key="skip_undefined_labels" value="true"/>
-                    <parameter key="use_example_weights" value="true"/>
-                    <list key="class_weights"/>
-                  </operator>
-                  <connect from_port="model" to_op="Apply Model." to_port="model"/>
-                  <connect from_port="test set" to_op="Apply Model." to_port="unlabelled data"/>
-                  <connect from_op="Apply Model." from_port="labelled data" to_op="Performance (2)" to_port="labelled data"/>
-                  <connect from_op="Performance (2)" from_port="performance" to_port="performance 1"/>
-                  <connect from_op="Performance (2)" from_port="example set" to_port="test set results"/>
-                  <portSpacing port="source_model" spacing="0"/>
-                  <portSpacing port="source_test set" spacing="0"/>
-                  <portSpacing port="source_through 1" spacing="0"/>
-                  <portSpacing port="sink_test set results" spacing="0"/>
-                  <portSpacing port="sink_performance 1" spacing="0"/>
-                  <portSpacing port="sink_performance 2" spacing="0"/>
-                </process>
+              <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (6)" width="90" x="313" y="238">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="C" value="0.0"/>
               </operator>
-              <connect from_port="input 1" to_op="Cross Validation (2)" to_port="example set"/>
-              <connect from_op="Cross Validation (2)" from_port="model" to_port="model"/>
-              <connect from_op="Cross Validation (2)" from_port="performance 1" to_port="performance"/>
-              <portSpacing port="source_input 1" spacing="0"/>
-              <portSpacing port="source_input 2" spacing="0"/>
-              <portSpacing port="sink_performance" spacing="0"/>
-              <portSpacing port="sink_model" spacing="0"/>
-              <portSpacing port="sink_output 1" spacing="0"/>
+              <operator activated="false" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (10)" width="90" x="313" y="136">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+              </operator>
+              <operator activated="true" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation (6)" width="90" x="313" y="34">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="squared_correlation" value="false"/>
+              </operator>
+              <operator activated="false" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation (6)" width="90" x="313" y="340">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="normalize" value="none"/>
+              </operator>
+              <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (11)" width="90" x="581" y="34">
+                <parameter key="weight_relation" value="top p%"/>
+                <parameter key="weight" value="1.0"/>
+                <parameter key="k" value="10"/>
+                <parameter key="p" value="0.2"/>
+                <parameter key="deselect_unknown" value="true"/>
+                <parameter key="use_absolute_weights" value="true"/>
+              </operator>
+              <connect from_port="in 1" to_op="Weight by Correlation (6)" to_port="example set"/>
+              <connect from_op="Weight by Correlation (6)" from_port="weights" to_op="Select by Weights (11)" to_port="weights"/>
+              <connect from_op="Weight by Correlation (6)" from_port="example set" to_op="Select by Weights (11)" to_port="example set input"/>
+              <connect from_op="Select by Weights (11)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
             </process>
-            <description align="center" color="transparent" colored="false" width="126">Decision Tree</description>
           </operator>
-          <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model (5)" width="90" x="581" y="238">
-            <list key="application_parameters"/>
-            <parameter key="create_view" value="false"/>
-          </operator>
-          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data (4)" width="90" x="715" y="238">
-            <parameter key="main_criterion" value="first"/>
-            <parameter key="accuracy" value="true"/>
-            <parameter key="classification_error" value="true"/>
-            <parameter key="kappa" value="true"/>
-            <parameter key="weighted_mean_recall" value="true"/>
-            <parameter key="weighted_mean_precision" value="true"/>
-            <parameter key="spearman_rho" value="true"/>
-            <parameter key="kendall_tau" value="true"/>
-            <parameter key="absolute_error" value="true"/>
-            <parameter key="relative_error" value="true"/>
-            <parameter key="relative_error_lenient" value="true"/>
-            <parameter key="relative_error_strict" value="true"/>
-            <parameter key="normalized_absolute_error" value="true"/>
-            <parameter key="root_mean_squared_error" value="true"/>
-            <parameter key="root_relative_squared_error" value="true"/>
-            <parameter key="squared_error" value="true"/>
-            <parameter key="correlation" value="true"/>
-            <parameter key="squared_correlation" value="true"/>
-            <parameter key="cross-entropy" value="true"/>
-            <parameter key="margin" value="true"/>
-            <parameter key="soft_margin_loss" value="true"/>
-            <parameter key="logistic_loss" value="true"/>
-            <parameter key="skip_undefined_labels" value="true"/>
-            <parameter key="use_example_weights" value="true"/>
-            <list key="class_weights"/>
-          </operator>
-          <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet (4)" width="90" x="849" y="238"/>
-          <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes (4)" width="90" x="983" y="238">
-            <list key="function_descriptions">
-              <parameter key="Data Basis" value="&quot;Single Token&quot;"/>
-              <parameter key="Algorithm" value="&quot;Decision Tree&quot;"/>
-            </list>
-            <parameter key="keep_all" value="true"/>
-          </operator>
-          <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (4)" width="90" x="1117" y="238">
-            <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Decision Tree"/>
-          </operator>
-          <operator activated="true" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (4)" width="90" x="112" y="34">
-            <parameter key="normalize_weights" value="false"/>
-            <parameter key="sort_weights" value="true"/>
-            <parameter key="sort_direction" value="ascending"/>
-            <description align="center" color="transparent" colored="false" width="126">78% with naive</description>
-          </operator>
-          <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (4)" width="90" x="246" y="34">
-            <parameter key="weight_relation" value="top k"/>
-            <parameter key="weight" value="1.0"/>
-            <parameter key="k" value="500"/>
-            <parameter key="p" value="0.5"/>
-            <parameter key="deselect_unknown" value="true"/>
-            <parameter key="use_absolute_weights" value="true"/>
-          </operator>
-          <connect from_op="Apply Model (5)" from_port="labelled data" to_op="Performance Test Data (4)" to_port="labelled data"/>
-          <connect from_op="Performance Test Data (4)" from_port="performance" to_op="Confusion Matrix to ExampleSet (4)" to_port="per"/>
-          <connect from_op="Confusion Matrix to ExampleSet (4)" from_port="exa" to_op="Generate Attributes (4)" to_port="example set input"/>
-          <connect from_op="Generate Attributes (4)" from_port="example set output" to_op="Store (4)" to_port="input"/>
-          <connect from_op="Weight by Gini Index (4)" from_port="weights" to_op="Select by Weights (4)" to_port="weights"/>
-          <connect from_op="Weight by Gini Index (4)" from_port="example set" to_op="Select by Weights (4)" to_port="example set input"/>
-          <portSpacing port="source_in 1" spacing="0"/>
-          <portSpacing port="sink_out 1" spacing="0"/>
-        </process>
-      </operator>
-      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="68" name="Random Forest (2)" width="90" x="715" y="595">
-        <process expanded="true">
-          <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (6)" width="90" x="380" y="34">
+          <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (3)" width="90" x="447" y="34">
             <list key="parameters">
-              <parameter key="Random Forest.number_of_trees" value="[40;40;10;linear]"/>
+              <parameter key="Cross Validation (3).number_of_folds" value="[5;15;15;linear]"/>
             </list>
-            <parameter key="error_handling" value="fail on error"/>
-            <parameter key="log_performance" value="true"/>
-            <parameter key="log_all_criteria" value="false"/>
-            <parameter key="synchronize" value="false"/>
-            <parameter key="enable_parallel_execution" value="true"/>
-            <process expanded="true">
-              <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation (7)" width="90" x="179" y="34">
-                <parameter key="split_on_batch_attribute" value="false"/>
-                <parameter key="leave_one_out" value="false"/>
-                <parameter key="number_of_folds" value="10"/>
-                <parameter key="sampling_type" value="automatic"/>
-                <parameter key="use_local_random_seed" value="false"/>
-                <parameter key="local_random_seed" value="1992"/>
-                <parameter key="enable_parallel_execution" value="true"/>
-                <process expanded="true">
-                  <operator activated="true" class="concurrency:parallel_random_forest" compatibility="9.10.008" expanded="true" height="103" name="Random Forest" width="90" x="246" y="34">
-                    <parameter key="number_of_trees" value="40"/>
-                    <parameter key="criterion" value="gain_ratio"/>
-                    <parameter key="maximal_depth" value="10"/>
-                    <parameter key="apply_pruning" value="false"/>
-                    <parameter key="confidence" value="0.1"/>
-                    <parameter key="apply_prepruning" value="false"/>
-                    <parameter key="minimal_gain" value="0.01"/>
-                    <parameter key="minimal_leaf_size" value="2"/>
-                    <parameter key="minimal_size_for_split" value="4"/>
-                    <parameter key="number_of_prepruning_alternatives" value="3"/>
-                    <parameter key="random_splits" value="false"/>
-                    <parameter key="guess_subset_ratio" value="true"/>
-                    <parameter key="subset_ratio" value="0.2"/>
-                    <parameter key="voting_strategy" value="confidence vote"/>
-                    <parameter key="use_local_random_seed" value="false"/>
-                    <parameter key="local_random_seed" value="1992"/>
-                    <parameter key="enable_parallel_execution" value="true"/>
-                  </operator>
-                  <connect from_port="training set" to_op="Random Forest" to_port="training set"/>
-                  <connect from_op="Random Forest" from_port="model" to_port="model"/>
-                  <portSpacing port="source_training set" spacing="0"/>
-                  <portSpacing port="sink_model" spacing="0"/>
-                  <portSpacing port="sink_through 1" spacing="0"/>
-                </process>
-                <process expanded="true">
-                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model. (7)" width="90" x="112" y="34">
-                    <list key="application_parameters"/>
-                    <parameter key="create_view" value="false"/>
-                  </operator>
-                  <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Random Forest" width="90" x="246" y="34">
-                    <parameter key="main_criterion" value="first"/>
-                    <parameter key="accuracy" value="true"/>
-                    <parameter key="classification_error" value="false"/>
-                    <parameter key="kappa" value="false"/>
-                    <parameter key="weighted_mean_recall" value="false"/>
-                    <parameter key="weighted_mean_precision" value="false"/>
-                    <parameter key="spearman_rho" value="false"/>
-                    <parameter key="kendall_tau" value="false"/>
-                    <parameter key="absolute_error" value="false"/>
-                    <parameter key="relative_error" value="false"/>
-                    <parameter key="relative_error_lenient" value="false"/>
-                    <parameter key="relative_error_strict" value="false"/>
-                    <parameter key="normalized_absolute_error" value="false"/>
-                    <parameter key="root_mean_squared_error" value="false"/>
-                    <parameter key="root_relative_squared_error" value="false"/>
-                    <parameter key="squared_error" value="false"/>
-                    <parameter key="correlation" value="false"/>
-                    <parameter key="squared_correlation" value="false"/>
-                    <parameter key="cross-entropy" value="false"/>
-                    <parameter key="margin" value="false"/>
-                    <parameter key="soft_margin_loss" value="false"/>
-                    <parameter key="logistic_loss" value="false"/>
-                    <parameter key="skip_undefined_labels" value="true"/>
-                    <parameter key="use_example_weights" value="true"/>
-                    <list key="class_weights"/>
-                  </operator>
-                  <connect from_port="model" to_op="Apply Model. (7)" to_port="model"/>
-                  <connect from_port="test set" to_op="Apply Model. (7)" to_port="unlabelled data"/>
-                  <connect from_op="Apply Model. (7)" from_port="labelled data" to_op="Performance Random Forest" to_port="labelled data"/>
-                  <connect from_op="Performance Random Forest" from_port="performance" to_port="performance 1"/>
-                  <connect from_op="Performance Random Forest" from_port="example set" to_port="test set results"/>
-                  <portSpacing port="source_model" spacing="0"/>
-                  <portSpacing port="source_test set" spacing="0"/>
-                  <portSpacing port="source_through 1" spacing="0"/>
-                  <portSpacing port="sink_test set results" spacing="0"/>
-                  <portSpacing port="sink_performance 1" spacing="0"/>
-                  <portSpacing port="sink_performance 2" spacing="0"/>
-                </process>
-              </operator>
-              <connect from_port="input 1" to_op="Cross Validation (7)" to_port="example set"/>
-              <connect from_op="Cross Validation (7)" from_port="model" to_port="model"/>
-              <connect from_op="Cross Validation (7)" from_port="performance 1" to_port="performance"/>
-              <portSpacing port="source_input 1" spacing="0"/>
-              <portSpacing port="source_input 2" spacing="0"/>
-              <portSpacing port="sink_performance" spacing="0"/>
-              <portSpacing port="sink_model" spacing="0"/>
-              <portSpacing port="sink_output 1" spacing="0"/>
-            </process>
-            <description align="center" color="transparent" colored="false" width="126">Random Forest&lt;br&gt;</description>
-          </operator>
-          <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model (6)" width="90" x="380" y="289">
-            <list key="application_parameters"/>
-            <parameter key="create_view" value="false"/>
-          </operator>
-          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data (5)" width="90" x="514" y="289">
-            <parameter key="main_criterion" value="first"/>
-            <parameter key="accuracy" value="true"/>
-            <parameter key="classification_error" value="true"/>
-            <parameter key="kappa" value="true"/>
-            <parameter key="weighted_mean_recall" value="true"/>
-            <parameter key="weighted_mean_precision" value="true"/>
-            <parameter key="spearman_rho" value="true"/>
-            <parameter key="kendall_tau" value="true"/>
-            <parameter key="absolute_error" value="true"/>
-            <parameter key="relative_error" value="true"/>
-            <parameter key="relative_error_lenient" value="true"/>
-            <parameter key="relative_error_strict" value="true"/>
-            <parameter key="normalized_absolute_error" value="true"/>
-            <parameter key="root_mean_squared_error" value="true"/>
-            <parameter key="root_relative_squared_error" value="true"/>
-            <parameter key="squared_error" value="true"/>
-            <parameter key="correlation" value="true"/>
-            <parameter key="squared_correlation" value="true"/>
-            <parameter key="cross-entropy" value="true"/>
-            <parameter key="margin" value="true"/>
-            <parameter key="soft_margin_loss" value="true"/>
-            <parameter key="logistic_loss" value="true"/>
-            <parameter key="skip_undefined_labels" value="true"/>
-            <parameter key="use_example_weights" value="true"/>
-            <list key="class_weights"/>
-          </operator>
-          <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet (5)" width="90" x="648" y="289"/>
-          <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes (5)" width="90" x="782" y="289">
-            <list key="function_descriptions">
-              <parameter key="Data Basis" value="&quot;Single Token&quot;"/>
-              <parameter key="Algorithm" value="&quot;Random Forest&quot;"/>
-            </list>
-            <parameter key="keep_all" value="true"/>
-          </operator>
-          <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (5)" width="90" x="916" y="289">
-            <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Random Forest"/>
-          </operator>
-          <operator activated="true" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (5)" width="90" x="45" y="34">
-            <parameter key="normalize_weights" value="false"/>
-            <parameter key="sort_weights" value="true"/>
-            <parameter key="sort_direction" value="ascending"/>
-            <description align="center" color="transparent" colored="false" width="126">78% with naive</description>
-          </operator>
-          <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (5)" width="90" x="179" y="34">
-            <parameter key="weight_relation" value="top k"/>
-            <parameter key="weight" value="1.0"/>
-            <parameter key="k" value="500"/>
-            <parameter key="p" value="0.5"/>
-            <parameter key="deselect_unknown" value="true"/>
-            <parameter key="use_absolute_weights" value="true"/>
-          </operator>
-          <connect from_op="Apply Model (6)" from_port="labelled data" to_op="Performance Test Data (5)" to_port="labelled data"/>
-          <connect from_op="Performance Test Data (5)" from_port="performance" to_op="Confusion Matrix to ExampleSet (5)" to_port="per"/>
-          <connect from_op="Confusion Matrix to ExampleSet (5)" from_port="exa" to_op="Generate Attributes (5)" to_port="example set input"/>
-          <connect from_op="Generate Attributes (5)" from_port="example set output" to_op="Store (5)" to_port="input"/>
-          <connect from_op="Weight by Gini Index (5)" from_port="weights" to_op="Select by Weights (5)" to_port="weights"/>
-          <connect from_op="Weight by Gini Index (5)" from_port="example set" to_op="Select by Weights (5)" to_port="example set input"/>
-          <portSpacing port="source_in 1" spacing="0"/>
-          <portSpacing port="sink_out 1" spacing="0"/>
-        </process>
-      </operator>
-      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="68" name="Gradient Boosted Tree" width="90" x="715" y="697">
-        <process expanded="true">
-          <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (3)" width="90" x="380" y="34">
-            <list key="parameters"/>
             <parameter key="error_handling" value="fail on error"/>
             <parameter key="log_performance" value="true"/>
             <parameter key="log_all_criteria" value="false"/>
@@ -1044,11 +1268,11 @@
             </process>
             <description align="center" color="transparent" colored="false" width="126">Gradient Boosted Tree&lt;br&gt;</description>
           </operator>
-          <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model (7)" width="90" x="447" y="289">
+          <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model (7)" width="90" x="246" y="289">
             <list key="application_parameters"/>
             <parameter key="create_view" value="false"/>
           </operator>
-          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data (6)" width="90" x="581" y="289">
+          <operator activated="true" class="performance_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Test Data (6)" width="90" x="380" y="289">
             <parameter key="main_criterion" value="first"/>
             <parameter key="accuracy" value="true"/>
             <parameter key="classification_error" value="true"/>
@@ -1075,47 +1299,44 @@
             <parameter key="use_example_weights" value="true"/>
             <list key="class_weights"/>
           </operator>
-          <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet (6)" width="90" x="715" y="289"/>
-          <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes (6)" width="90" x="849" y="289">
+          <operator activated="true" class="converters:confusionmatrix_2_example_set" compatibility="0.9.000" expanded="true" height="82" name="Confusion Matrix to ExampleSet (6)" width="90" x="514" y="289"/>
+          <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes (6)" width="90" x="648" y="289">
             <list key="function_descriptions">
               <parameter key="Data Basis" value="&quot;Single Token&quot;"/>
               <parameter key="Algorithm" value="&quot;Gradient Boosted Trees&quot;"/>
             </list>
             <parameter key="keep_all" value="true"/>
           </operator>
-          <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (6)" width="90" x="983" y="289">
+          <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (6)" width="90" x="782" y="289">
             <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Gradient Boosted Tree"/>
           </operator>
-          <operator activated="true" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (6)" width="90" x="45" y="34">
-            <parameter key="normalize_weights" value="false"/>
-            <parameter key="sort_weights" value="true"/>
-            <parameter key="sort_direction" value="ascending"/>
-            <description align="center" color="transparent" colored="false" width="126">78% with naive</description>
-          </operator>
-          <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (6)" width="90" x="179" y="34">
-            <parameter key="weight_relation" value="top k"/>
-            <parameter key="weight" value="1.0"/>
-            <parameter key="k" value="500"/>
-            <parameter key="p" value="0.5"/>
-            <parameter key="deselect_unknown" value="true"/>
-            <parameter key="use_absolute_weights" value="true"/>
-          </operator>
+          <connect from_port="in 1" to_op="Optimize Parameters (Grid) (3)" to_port="input 1"/>
+          <connect from_port="in 2" to_op="Apply Model (7)" to_port="unlabelled data"/>
+          <connect from_op="Optimize Parameters (Grid) (3)" from_port="performance" to_port="out 1"/>
+          <connect from_op="Optimize Parameters (Grid) (3)" from_port="model" to_op="Apply Model (7)" to_port="model"/>
           <connect from_op="Apply Model (7)" from_port="labelled data" to_op="Performance Test Data (6)" to_port="labelled data"/>
           <connect from_op="Performance Test Data (6)" from_port="performance" to_op="Confusion Matrix to ExampleSet (6)" to_port="per"/>
           <connect from_op="Confusion Matrix to ExampleSet (6)" from_port="exa" to_op="Generate Attributes (6)" to_port="example set input"/>
+          <connect from_op="Confusion Matrix to ExampleSet (6)" from_port="ori" to_port="out 3"/>
           <connect from_op="Generate Attributes (6)" from_port="example set output" to_op="Store (6)" to_port="input"/>
-          <connect from_op="Weight by Gini Index (6)" from_port="weights" to_op="Select by Weights (6)" to_port="weights"/>
-          <connect from_op="Weight by Gini Index (6)" from_port="example set" to_op="Select by Weights (6)" to_port="example set input"/>
+          <connect from_op="Store (6)" from_port="through" to_port="out 2"/>
           <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="source_in 3" spacing="0"/>
           <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <portSpacing port="sink_out 3" spacing="0"/>
+          <portSpacing port="sink_out 4" spacing="0"/>
         </process>
       </operator>
       <connect from_op="Retrieve 2 grams" from_port="output" to_op="Data Prep 1" to_port="in 1"/>
       <connect from_op="Data Prep 1" from_port="out 1" to_op="Trainings Data" to_port="input"/>
       <connect from_op="Data Prep 1" from_port="out 2" to_op="Test Data" to_port="input"/>
-      <connect from_op="Naive Bayes (2)" from_port="out 1" to_port="result 1"/>
-      <connect from_op="Naive Bayes (2)" from_port="out 2" to_port="result 2"/>
-      <connect from_op="Naive Bayes (2)" from_port="out 3" to_port="result 3"/>
+      <connect from_op="Trainings Data" from_port="output 1" to_op="Gradient Boosted Tree" to_port="in 1"/>
+      <connect from_op="Test Data" from_port="output 1" to_op="Gradient Boosted Tree" to_port="in 2"/>
+      <connect from_op="Gradient Boosted Tree" from_port="out 1" to_port="result 1"/>
+      <connect from_op="Gradient Boosted Tree" from_port="out 2" to_port="result 2"/>
+      <connect from_op="Gradient Boosted Tree" from_port="out 3" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
