@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="9.10.001">
+<?xml version="1.0" encoding="UTF-8"?><process version="9.10.008">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="9.10.001" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="9.10.008" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -40,7 +40,7 @@
         <parameter key="datamanagement" value="double_sparse_array"/>
         <parameter key="data_management" value="auto"/>
         <process expanded="true">
-          <operator activated="true" class="open_file" compatibility="9.10.001" expanded="true" height="68" name="Open File" width="90" x="916" y="187">
+          <operator activated="true" class="open_file" compatibility="9.10.008" expanded="true" height="68" name="Open File" width="90" x="916" y="187">
             <parameter key="resource_type" value="file"/>
             <parameter key="filename" value="/Users/viktoria/Desktop/stop_words_new.txt"/>
           </operator>
@@ -77,7 +77,7 @@
           <operator activated="true" class="text:generate_n_grams_terms" compatibility="9.4.000" expanded="true" height="68" name="Generate n-Grams (Terms)" width="90" x="1318" y="34">
             <parameter key="max_length" value="2"/>
           </operator>
-          <operator activated="true" class="open_file" compatibility="9.10.001" expanded="true" height="68" name="Open File (2)" width="90" x="1318" y="187">
+          <operator activated="true" class="open_file" compatibility="9.10.008" expanded="true" height="68" name="Open File (2)" width="90" x="1318" y="187">
             <parameter key="resource_type" value="file"/>
             <parameter key="filename" value="/Users/viktoria/Downloads/stop_words_2grams.txt"/>
           </operator>
@@ -101,19 +101,23 @@
           <portSpacing port="source_document" spacing="0"/>
           <portSpacing port="sink_document 1" spacing="0"/>
           <portSpacing port="sink_document 2" spacing="0"/>
-          <description align="center" color="yellow" colored="false" height="145" resized="false" width="180" x="1083" y="135">Stopword Liste manuell erststellt, nach erstem Lauf :&lt;br/&gt;- alle Zutaten entfernt&lt;br/&gt;- Zutaten, die in allen Rezepten h&amp;#228;ufig vorkommen hinzugef&amp;#252;gt (date, water, salt, pepper)</description>
+          <description align="center" color="transparent" colored="true" height="101" resized="true" width="135" x="1023" y="122">additional stopwords (no ingredients)</description>
+          <description align="center" color="transparent" colored="true" height="51" resized="false" width="126" x="226" y="115">Removing html tags</description>
+          <description align="center" color="transparent" colored="true" height="51" resized="false" width="126" x="632" y="113">Keep nouns only</description>
+          <description align="center" color="transparent" colored="true" height="51" resized="false" width="126" x="900" y="115">Length min. 4</description>
+          <description align="center" color="transparent" colored="true" height="108" resized="false" width="135" x="1441" y="128">additional 2 grams stopwords that were in top 10 before (e.g. pasta_pasta)</description>
         </process>
       </operator>
-      <operator activated="true" class="generate_attributes" compatibility="9.10.001" expanded="true" height="82" name="Generate Attributes" width="90" x="246" y="136">
+      <operator activated="true" class="generate_attributes" compatibility="9.10.008" expanded="true" height="82" name="Generate Attributes" width="90" x="246" y="136">
         <list key="function_descriptions">
           <parameter key="test/train" value="&quot;test&quot;"/>
         </list>
         <parameter key="keep_all" value="true"/>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store exa" width="90" x="447" y="136">
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store exa" width="90" x="447" y="136">
         <parameter key="repository_entry" value="../../Data/Task 1 Exploration RM Part/exa_2_grams_test"/>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store wordlist" width="90" x="447" y="34">
+      <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store wordlist" width="90" x="447" y="34">
         <parameter key="repository_entry" value="../../Data/Test_Data/2grams_data_test"/>
       </operator>
       <connect from_port="input 1" to_op="Process Documents from Files" to_port="word list"/>

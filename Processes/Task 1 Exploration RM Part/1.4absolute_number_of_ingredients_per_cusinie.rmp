@@ -454,6 +454,7 @@
       <portSpacing port="sink_result 7" spacing="0"/>
       <portSpacing port="sink_result 8" spacing="0"/>
       <portSpacing port="sink_result 9" spacing="0"/>
+      <description align="center" color="transparent" colored="true" height="50" resized="true" width="109" x="237" y="10">select cuisine</description>
     </process>
   </operator>
 </process>
