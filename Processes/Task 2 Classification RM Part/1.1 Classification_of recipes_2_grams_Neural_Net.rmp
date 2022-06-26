@@ -125,26 +125,12 @@
         </process>
       </operator>
       <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Train data" width="90" x="447" y="136"/>
-      <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Test data" width="90" x="514" y="442"/>
+      <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Test data" width="90" x="447" y="238"/>
       <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameter (6)" width="90" x="715" y="136">
         <process expanded="true">
-          <operator activated="true" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (6)" width="90" x="380" y="34">
-            <parameter key="normalize_weights" value="false"/>
-            <parameter key="sort_weights" value="true"/>
-            <parameter key="sort_direction" value="ascending"/>
-            <parameter key="C" value="0.0"/>
-          </operator>
-          <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (6)" width="90" x="581" y="34">
-            <parameter key="weight_relation" value="top p%"/>
-            <parameter key="weight" value="1.0"/>
-            <parameter key="k" value="10"/>
-            <parameter key="p" value="0.5"/>
-            <parameter key="deselect_unknown" value="true"/>
-            <parameter key="use_absolute_weights" value="true"/>
-          </operator>
-          <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="166" name="Optimize Parameters (Grid) (3)" width="90" x="715" y="34">
+          <operator activated="false" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="166" name="Optimize Parameters (Grid) (3)" width="90" x="581" y="34">
             <list key="parameters">
-              <parameter key="Neural Net (2).learning_rate" value="[4.9E-324;1.0;10;linear]"/>
+              <parameter key="Cross Validation (7).number_of_folds" value="[5;15;15;linear]"/>
             </list>
             <parameter key="error_handling" value="fail on error"/>
             <parameter key="log_performance" value="true"/>
@@ -245,6 +231,61 @@
             </process>
             <description align="center" color="transparent" colored="false" width="126">Neural Net</description>
           </operator>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro. (5)" width="90" x="380" y="34">
+            <process expanded="true">
+              <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (5)" width="90" x="313" y="238">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="C" value="0.0"/>
+              </operator>
+              <operator activated="false" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (9)" width="90" x="313" y="136">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+              </operator>
+              <operator activated="true" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation (5)" width="90" x="313" y="34">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="squared_correlation" value="false"/>
+              </operator>
+              <operator activated="false" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation (5)" width="90" x="313" y="340">
+                <parameter key="normalize_weights" value="false"/>
+                <parameter key="sort_weights" value="true"/>
+                <parameter key="sort_direction" value="ascending"/>
+                <parameter key="normalize" value="none"/>
+              </operator>
+              <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (10)" width="90" x="581" y="34">
+                <parameter key="weight_relation" value="top p%"/>
+                <parameter key="weight" value="1.0"/>
+                <parameter key="k" value="10"/>
+                <parameter key="p" value="0.5"/>
+                <parameter key="deselect_unknown" value="true"/>
+                <parameter key="use_absolute_weights" value="true"/>
+              </operator>
+              <connect from_port="in 1" to_op="Weight by Correlation (5)" to_port="example set"/>
+              <connect from_op="Weight by Correlation (5)" from_port="weights" to_op="Select by Weights (10)" to_port="weights"/>
+              <connect from_op="Weight by Correlation (5)" from_port="example set" to_op="Select by Weights (10)" to_port="example set input"/>
+              <connect from_op="Select by Weights (10)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="true" class="neural_net" compatibility="9.10.008" expanded="true" height="82" name="Neural Net" width="90" x="380" y="187">
+            <list key="hidden_layers"/>
+            <parameter key="training_cycles" value="200"/>
+            <parameter key="learning_rate" value="0.01"/>
+            <parameter key="momentum" value="0.9"/>
+            <parameter key="decay" value="false"/>
+            <parameter key="shuffle" value="true"/>
+            <parameter key="normalize" value="true"/>
+            <parameter key="error_epsilon" value="1.0E-4"/>
+            <parameter key="use_local_random_seed" value="false"/>
+            <parameter key="local_random_seed" value="1992"/>
+          </operator>
           <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model (6)" width="90" x="581" y="289">
             <list key="application_parameters"/>
             <parameter key="create_view" value="false"/>
@@ -287,13 +328,9 @@
           <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (6)" width="90" x="1184" y="391">
             <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Neural Net"/>
           </operator>
-          <connect from_port="in 1" to_op="Weight by SVM (6)" to_port="example set"/>
+          <connect from_port="in 1" to_op="Neural Net" to_port="training set"/>
           <connect from_port="in 2" to_op="Apply Model (6)" to_port="unlabelled data"/>
-          <connect from_op="Weight by SVM (6)" from_port="weights" to_op="Select by Weights (6)" to_port="weights"/>
-          <connect from_op="Weight by SVM (6)" from_port="example set" to_op="Select by Weights (6)" to_port="example set input"/>
-          <connect from_op="Select by Weights (6)" from_port="example set output" to_op="Optimize Parameters (Grid) (3)" to_port="input 1"/>
-          <connect from_op="Optimize Parameters (Grid) (3)" from_port="performance" to_port="out 1"/>
-          <connect from_op="Optimize Parameters (Grid) (3)" from_port="model" to_op="Apply Model (6)" to_port="model"/>
+          <connect from_op="Neural Net" from_port="model" to_op="Apply Model (6)" to_port="model"/>
           <connect from_op="Apply Model (6)" from_port="labelled data" to_op="Performance Test Neural Net" to_port="labelled data"/>
           <connect from_op="Performance Test Neural Net" from_port="performance" to_op="Confusion Matrix to ExampleSet (6)" to_port="per"/>
           <connect from_op="Confusion Matrix to ExampleSet (6)" from_port="exa" to_op="Generate Attributes (6)" to_port="example set input"/>
