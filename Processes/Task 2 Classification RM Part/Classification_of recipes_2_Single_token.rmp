@@ -157,7 +157,7 @@
                 <parameter key="weight_relation" value="top p%"/>
                 <parameter key="weight" value="1.0"/>
                 <parameter key="k" value="10"/>
-                <parameter key="p" value="0.5"/>
+                <parameter key="p" value="0.2"/>
                 <parameter key="deselect_unknown" value="true"/>
                 <parameter key="use_absolute_weights" value="true"/>
               </operator>
