@@ -162,7 +162,7 @@
         <description align="center" color="transparent" colored="false" width="126">Union to get all data together</description>
       </operator>
       <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="1452" y="340">
-        <parameter key="excel_file" value="G:/Meine Ablage/ingridients.xlsx"/>
+        <parameter key="excel_file" value="C:/Users/s6355/Google Drive/Project - BI- and Big-Data-Design Workshop/Task 1_Dashboard/ingridients.xlsx"/>
         <parameter key="file_format" value="xlsx"/>
         <enumeration key="sheet_names">
           <parameter key="sheet_name_element" value="Handover_test"/>
