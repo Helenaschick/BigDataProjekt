@@ -41,9 +41,25 @@
         <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Neural Net"/>
       </operator>
       <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (4)" width="90" x="313" y="1003"/>
-      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (6)" width="90" x="447" y="850"/>
-      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (7)" width="90" x="648" y="595"/>
-      <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="782" y="391">
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (6)" width="90" x="514" y="850"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve Random Forest 2 grams" width="90" x="112" y="1156">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Random Forest"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve Random Forest Single Token" width="90" x="112" y="1258">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Random Forest"/>
+      </operator>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (8)" width="90" x="313" y="1207"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve Gradient Boosted Trees 2 grams" width="90" x="112" y="1360">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Gradient Boosted Tree"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve Gradient Boosted Trees Single" width="90" x="112" y="1462">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Gradient Boosted Tree"/>
+      </operator>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (9)" width="90" x="313" y="1411"/>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (10)" width="90" x="514" y="1309"/>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (11)" width="90" x="849" y="850"/>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (7)" width="90" x="1117" y="697"/>
+      <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="1117" y="544">
         <parameter key="excel_file" value="/Volumes/GoogleDrive/.shortcut-targets-by-id/1Rnp5v40n7RDKtUJBi_66xjeainmGeqF3/Project - BI- and Big-Data-Design Workshop/Task 2_Dashboard/Classification_results.xlsx"/>
         <parameter key="file_format" value="xlsx"/>
         <enumeration key="sheet_names"/>
@@ -65,11 +81,20 @@
       <connect from_op="Retrieve neural single" from_port="output" to_op="Union (4)" to_port="example set 2"/>
       <connect from_op="Retrieve neural 2grams" from_port="output" to_op="Union (4)" to_port="example set 1"/>
       <connect from_op="Union (4)" from_port="union" to_op="Union (6)" to_port="example set 2"/>
-      <connect from_op="Union (6)" from_port="union" to_op="Union (7)" to_port="example set 2"/>
+      <connect from_op="Union (6)" from_port="union" to_op="Union (11)" to_port="example set 1"/>
+      <connect from_op="Retrieve Random Forest 2 grams" from_port="output" to_op="Union (8)" to_port="example set 1"/>
+      <connect from_op="Retrieve Random Forest Single Token" from_port="output" to_op="Union (8)" to_port="example set 2"/>
+      <connect from_op="Union (8)" from_port="union" to_op="Union (10)" to_port="example set 1"/>
+      <connect from_op="Retrieve Gradient Boosted Trees 2 grams" from_port="output" to_op="Union (9)" to_port="example set 1"/>
+      <connect from_op="Retrieve Gradient Boosted Trees Single" from_port="output" to_op="Union (9)" to_port="example set 2"/>
+      <connect from_op="Union (9)" from_port="union" to_op="Union (10)" to_port="example set 2"/>
+      <connect from_op="Union (10)" from_port="union" to_op="Union (11)" to_port="example set 2"/>
+      <connect from_op="Union (11)" from_port="union" to_op="Union (7)" to_port="example set 2"/>
       <connect from_op="Union (7)" from_port="union" to_op="Write Excel" to_port="input"/>
+      <connect from_op="Write Excel" from_port="through" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
-      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="151" y="1172">gradient bossted und random forest hinzuf&amp;#252;gen</description>
+      <portSpacing port="sink_result 2" spacing="0"/>
     </process>
   </operator>
 </process>
