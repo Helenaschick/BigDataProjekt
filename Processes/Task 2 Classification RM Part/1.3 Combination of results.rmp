@@ -12,14 +12,39 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve" width="90" x="112" y="136">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve Naive 2grams" width="90" x="112" y="136">
         <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Naive Bayes"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve (2)" width="90" x="112" y="289">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve Naive single" width="90" x="112" y="289">
         <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Naive Bayes"/>
       </operator>
       <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union" width="90" x="313" y="238"/>
-      <operator activated="false" class="write_excel" compatibility="9.10.008" expanded="true" height="82" name="Write Excel" width="90" x="581" y="391">
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve decision single" width="90" x="112" y="544">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Decision Tree"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve decision 2grams" width="90" x="112" y="391">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Decision Tree"/>
+      </operator>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (2)" width="90" x="313" y="442"/>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (5)" width="90" x="514" y="340"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve KNN single" width="90" x="112" y="799">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_k-NN"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve KNN 2grams" width="90" x="112" y="646">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_KNN"/>
+      </operator>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (3)" width="90" x="313" y="748"/>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve neural single" width="90" x="112" y="1054">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/single_token_Neural Net"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="9.10.008" expanded="true" height="68" name="Retrieve neural 2grams" width="90" x="112" y="901">
+        <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Neural Net"/>
+      </operator>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (4)" width="90" x="313" y="1003"/>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (6)" width="90" x="447" y="850"/>
+      <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (7)" width="90" x="648" y="595"/>
+      <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="782" y="391">
+        <parameter key="excel_file" value="/Volumes/GoogleDrive/.shortcut-targets-by-id/1Rnp5v40n7RDKtUJBi_66xjeainmGeqF3/Project - BI- and Big-Data-Design Workshop/Task 2_Dashboard/Classification_results.xlsx"/>
         <parameter key="file_format" value="xlsx"/>
         <enumeration key="sheet_names"/>
         <parameter key="sheet_name" value="RapidMiner Data"/>
@@ -27,12 +52,24 @@
         <parameter key="number_format" value="#.0"/>
         <parameter key="encoding" value="SYSTEM"/>
       </operator>
-      <connect from_op="Retrieve" from_port="output" to_op="Union" to_port="example set 1"/>
-      <connect from_op="Retrieve (2)" from_port="output" to_op="Union" to_port="example set 2"/>
-      <connect from_op="Union" from_port="union" to_port="result 1"/>
+      <connect from_op="Retrieve Naive 2grams" from_port="output" to_op="Union" to_port="example set 1"/>
+      <connect from_op="Retrieve Naive single" from_port="output" to_op="Union" to_port="example set 2"/>
+      <connect from_op="Union" from_port="union" to_op="Union (5)" to_port="example set 1"/>
+      <connect from_op="Retrieve decision single" from_port="output" to_op="Union (2)" to_port="example set 2"/>
+      <connect from_op="Retrieve decision 2grams" from_port="output" to_op="Union (2)" to_port="example set 1"/>
+      <connect from_op="Union (2)" from_port="union" to_op="Union (5)" to_port="example set 2"/>
+      <connect from_op="Union (5)" from_port="union" to_op="Union (7)" to_port="example set 1"/>
+      <connect from_op="Retrieve KNN single" from_port="output" to_op="Union (3)" to_port="example set 2"/>
+      <connect from_op="Retrieve KNN 2grams" from_port="output" to_op="Union (3)" to_port="example set 1"/>
+      <connect from_op="Union (3)" from_port="union" to_op="Union (6)" to_port="example set 1"/>
+      <connect from_op="Retrieve neural single" from_port="output" to_op="Union (4)" to_port="example set 2"/>
+      <connect from_op="Retrieve neural 2grams" from_port="output" to_op="Union (4)" to_port="example set 1"/>
+      <connect from_op="Union (4)" from_port="union" to_op="Union (6)" to_port="example set 2"/>
+      <connect from_op="Union (6)" from_port="union" to_op="Union (7)" to_port="example set 2"/>
+      <connect from_op="Union (7)" from_port="union" to_op="Write Excel" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
-      <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="151" y="1172">gradient bossted und random forest hinzuf&amp;#252;gen</description>
     </process>
   </operator>
 </process>
