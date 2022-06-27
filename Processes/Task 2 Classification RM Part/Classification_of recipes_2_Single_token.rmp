@@ -126,7 +126,7 @@
       </operator>
       <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Trainings Data" width="90" x="380" y="136"/>
       <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Test Data" width="90" x="380" y="238"/>
-      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Random Forest (2)" width="90" x="715" y="697">
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Random Forest (2)" width="90" x="715" y="697">
         <process expanded="true">
           <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro. (5)" width="90" x="179" y="34">
             <process expanded="true">
@@ -731,7 +731,7 @@
           <portSpacing port="sink_out 4" spacing="0"/>
         </process>
       </operator>
-      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Naive Bayes (2)" width="90" x="715" y="85">
+      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Naive Bayes (2)" width="90" x="715" y="85">
         <process expanded="true">
           <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro." width="90" x="246" y="34">
             <process expanded="true">
@@ -746,13 +746,13 @@
                 <parameter key="sort_weights" value="true"/>
                 <parameter key="sort_direction" value="ascending"/>
               </operator>
-              <operator activated="false" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation" width="90" x="313" y="34">
+              <operator activated="true" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation" width="90" x="313" y="34">
                 <parameter key="normalize_weights" value="false"/>
                 <parameter key="sort_weights" value="true"/>
                 <parameter key="sort_direction" value="ascending"/>
                 <parameter key="squared_correlation" value="false"/>
               </operator>
-              <operator activated="true" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation (2)" width="90" x="313" y="340">
+              <operator activated="false" class="weight_by_deviation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Deviation (2)" width="90" x="313" y="340">
                 <parameter key="normalize_weights" value="false"/>
                 <parameter key="sort_weights" value="true"/>
                 <parameter key="sort_direction" value="ascending"/>
@@ -762,13 +762,13 @@
                 <parameter key="weight_relation" value="top p%"/>
                 <parameter key="weight" value="1.0"/>
                 <parameter key="k" value="10"/>
-                <parameter key="p" value="0.2"/>
+                <parameter key="p" value="0.5"/>
                 <parameter key="deselect_unknown" value="true"/>
                 <parameter key="use_absolute_weights" value="true"/>
               </operator>
-              <connect from_port="in 1" to_op="Weight by Deviation (2)" to_port="example set"/>
-              <connect from_op="Weight by Deviation (2)" from_port="weights" to_op="Select by Weights" to_port="weights"/>
-              <connect from_op="Weight by Deviation (2)" from_port="example set" to_op="Select by Weights" to_port="example set input"/>
+              <connect from_port="in 1" to_op="Weight by Correlation" to_port="example set"/>
+              <connect from_op="Weight by Correlation" from_port="weights" to_op="Select by Weights" to_port="weights"/>
+              <connect from_op="Weight by Correlation" from_port="example set" to_op="Select by Weights" to_port="example set input"/>
               <connect from_op="Select by Weights" from_port="example set output" to_port="out 1"/>
               <portSpacing port="source_in 1" spacing="0"/>
               <portSpacing port="source_in 2" spacing="0"/>
@@ -1132,12 +1132,12 @@
                 <parameter key="sort_direction" value="ascending"/>
                 <parameter key="C" value="0.0"/>
               </operator>
-              <operator activated="true" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (10)" width="90" x="313" y="136">
+              <operator activated="false" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (10)" width="90" x="313" y="136">
                 <parameter key="normalize_weights" value="false"/>
                 <parameter key="sort_weights" value="true"/>
                 <parameter key="sort_direction" value="ascending"/>
               </operator>
-              <operator activated="false" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation (6)" width="90" x="313" y="34">
+              <operator activated="true" class="weight_by_correlation" compatibility="9.10.008" expanded="true" height="82" name="Weight by Correlation (6)" width="90" x="313" y="34">
                 <parameter key="normalize_weights" value="false"/>
                 <parameter key="sort_weights" value="true"/>
                 <parameter key="sort_direction" value="ascending"/>
@@ -1157,9 +1157,9 @@
                 <parameter key="deselect_unknown" value="true"/>
                 <parameter key="use_absolute_weights" value="true"/>
               </operator>
-              <connect from_port="in 1" to_op="Weight by Gini Index (10)" to_port="example set"/>
-              <connect from_op="Weight by Gini Index (10)" from_port="weights" to_op="Select by Weights (11)" to_port="weights"/>
-              <connect from_op="Weight by Gini Index (10)" from_port="example set" to_op="Select by Weights (11)" to_port="example set input"/>
+              <connect from_port="in 1" to_op="Weight by Correlation (6)" to_port="example set"/>
+              <connect from_op="Weight by Correlation (6)" from_port="weights" to_op="Select by Weights (11)" to_port="weights"/>
+              <connect from_op="Weight by Correlation (6)" from_port="example set" to_op="Select by Weights (11)" to_port="example set input"/>
               <connect from_op="Select by Weights (11)" from_port="example set output" to_port="out 1"/>
               <portSpacing port="source_in 1" spacing="0"/>
               <portSpacing port="source_in 2" spacing="0"/>
@@ -1169,7 +1169,9 @@
           </operator>
           <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameters (Grid) (3)" width="90" x="447" y="34">
             <list key="parameters">
-              <parameter key="Cross Validation (3).number_of_folds" value="[5;15;15;linear]"/>
+              <parameter key="Gradient Boosted Trees.number_of_trees" value="[1.0;100;9;linear]"/>
+              <parameter key="Gradient Boosted Trees.maximal_depth" value="[10;100;9;linear]"/>
+              <parameter key="Gradient Boosted Trees.learning_rate" value="[0.01;1;15;linear]"/>
             </list>
             <parameter key="error_handling" value="fail on error"/>
             <parameter key="log_performance" value="true"/>
@@ -1334,11 +1336,11 @@
       <connect from_op="Retrieve 2 grams" from_port="output" to_op="Data Prep 1" to_port="in 1"/>
       <connect from_op="Data Prep 1" from_port="out 1" to_op="Trainings Data" to_port="input"/>
       <connect from_op="Data Prep 1" from_port="out 2" to_op="Test Data" to_port="input"/>
-      <connect from_op="Trainings Data" from_port="output 1" to_op="Random Forest (2)" to_port="in 1"/>
-      <connect from_op="Test Data" from_port="output 1" to_op="Random Forest (2)" to_port="in 2"/>
-      <connect from_op="Random Forest (2)" from_port="out 1" to_port="result 1"/>
-      <connect from_op="Random Forest (2)" from_port="out 2" to_port="result 2"/>
-      <connect from_op="Random Forest (2)" from_port="out 3" to_port="result 3"/>
+      <connect from_op="Trainings Data" from_port="output 1" to_op="Naive Bayes (2)" to_port="in 1"/>
+      <connect from_op="Test Data" from_port="output 1" to_op="Naive Bayes (2)" to_port="in 2"/>
+      <connect from_op="Naive Bayes (2)" from_port="out 1" to_port="result 1"/>
+      <connect from_op="Naive Bayes (2)" from_port="out 2" to_port="result 2"/>
+      <connect from_op="Naive Bayes (2)" from_port="out 3" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
