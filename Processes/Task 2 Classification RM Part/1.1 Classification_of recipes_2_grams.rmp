@@ -368,7 +368,7 @@
         </process>
         <description align="center" color="transparent" colored="false" width="126">Gradient Boosted Trees</description>
       </operator>
-      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameter (4)" width="90" x="715" y="646">
+      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameter (4)" width="90" x="715" y="646">
         <process expanded="true">
           <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (4)" width="90" x="380" y="34">
             <parameter key="normalize_weights" value="false"/>
@@ -386,7 +386,7 @@
           </operator>
           <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.10.008" expanded="true" height="166" name="Optimize Parameters (Grid)" width="90" x="715" y="34">
             <list key="parameters">
-              <parameter key="Random Forest (2).criterion" value="gain_ratio,information_gain,gini_index,accuracy"/>
+              <parameter key="Random Forest (2).minimal_gain" value="[0.01;0.5;10;linear]"/>
             </list>
             <parameter key="error_handling" value="fail on error"/>
             <parameter key="log_performance" value="true"/>
@@ -404,8 +404,8 @@
                 <parameter key="enable_parallel_execution" value="true"/>
                 <process expanded="true">
                   <operator activated="true" class="concurrency:parallel_random_forest" compatibility="9.10.008" expanded="true" height="103" name="Random Forest (2)" width="90" x="246" y="34">
-                    <parameter key="number_of_trees" value="100"/>
-                    <parameter key="criterion" value="gain_ratio"/>
+                    <parameter key="number_of_trees" value="80"/>
+                    <parameter key="criterion" value="accuracy"/>
                     <parameter key="maximal_depth" value="50"/>
                     <parameter key="apply_pruning" value="false"/>
                     <parameter key="confidence" value="0.1"/>
@@ -748,7 +748,7 @@
         </process>
         <description align="center" color="transparent" colored="false" width="126">Decision Tree</description>
       </operator>
-      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameter (2)" width="90" x="715" y="238">
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameter (2)" width="90" x="715" y="238">
         <process expanded="true">
           <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (2)" width="90" x="246" y="595">
             <parameter key="normalize_weights" value="false"/>
@@ -1321,11 +1321,11 @@
       <connect from_op="Retrieve 2 grams" from_port="output" to_op="Data Prep 1" to_port="in 1"/>
       <connect from_op="Data Prep 1" from_port="out 1" to_op="Train data" to_port="input"/>
       <connect from_op="Data Prep 1" from_port="out 2" to_op="Test data" to_port="input"/>
-      <connect from_op="Test data" from_port="output 1" to_op="Optimize Parameter (2)" to_port="in 2"/>
-      <connect from_op="Train data" from_port="output 1" to_op="Optimize Parameter (2)" to_port="in 1"/>
-      <connect from_op="Optimize Parameter (2)" from_port="out 1" to_port="result 1"/>
-      <connect from_op="Optimize Parameter (2)" from_port="out 2" to_port="result 2"/>
-      <connect from_op="Optimize Parameter (2)" from_port="out 3" to_port="result 3"/>
+      <connect from_op="Test data" from_port="output 1" to_op="Optimize Parameter (4)" to_port="in 2"/>
+      <connect from_op="Train data" from_port="output 1" to_op="Optimize Parameter (4)" to_port="in 1"/>
+      <connect from_op="Optimize Parameter (4)" from_port="out 1" to_port="result 1"/>
+      <connect from_op="Optimize Parameter (4)" from_port="out 2" to_port="result 2"/>
+      <connect from_op="Optimize Parameter (4)" from_port="out 3" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
