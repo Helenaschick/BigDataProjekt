@@ -128,13 +128,7 @@
       <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Train data" width="90" x="313" y="34"/>
       <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Optimize Parameter (5)" width="90" x="715" y="850">
         <process expanded="true">
-          <operator activated="false" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (5)" width="90" x="112" y="442">
-            <parameter key="normalize_weights" value="false"/>
-            <parameter key="sort_weights" value="true"/>
-            <parameter key="sort_direction" value="ascending"/>
-            <parameter key="C" value="0.0"/>
-          </operator>
-          <operator activated="true" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (5)" width="90" x="380" y="34">
+          <operator activated="false" class="weight_by_gini_index" compatibility="9.10.008" expanded="true" height="82" name="Weight by Gini Index (5)" width="90" x="179" y="442">
             <parameter key="normalize_weights" value="false"/>
             <parameter key="sort_weights" value="true"/>
             <parameter key="sort_direction" value="ascending"/>
@@ -151,11 +145,17 @@
             <parameter key="sort_direction" value="ascending"/>
             <parameter key="normalize" value="none"/>
           </operator>
+          <operator activated="true" class="weight_by_svm" compatibility="9.10.008" expanded="true" height="82" name="Weight by SVM (5)" width="90" x="380" y="85">
+            <parameter key="normalize_weights" value="false"/>
+            <parameter key="sort_weights" value="true"/>
+            <parameter key="sort_direction" value="ascending"/>
+            <parameter key="C" value="0.0"/>
+          </operator>
           <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (5)" width="90" x="581" y="34">
             <parameter key="weight_relation" value="top p%"/>
             <parameter key="weight" value="1.0"/>
             <parameter key="k" value="10"/>
-            <parameter key="p" value="0.2"/>
+            <parameter key="p" value="0.5"/>
             <parameter key="deselect_unknown" value="true"/>
             <parameter key="use_absolute_weights" value="true"/>
           </operator>
@@ -307,10 +307,10 @@
           <operator activated="true" class="store" compatibility="9.10.008" expanded="true" height="68" name="Store (8)" width="90" x="1117" y="391">
             <parameter key="repository_entry" value="../../Data/Task 2 Classification RM Part/2_grams_Gradient Boosted Tree"/>
           </operator>
-          <connect from_port="in 1" to_op="Weight by Gini Index (5)" to_port="example set"/>
+          <connect from_port="in 1" to_op="Weight by SVM (5)" to_port="example set"/>
           <connect from_port="in 2" to_op="Apply Model (5)" to_port="unlabelled data"/>
-          <connect from_op="Weight by Gini Index (5)" from_port="weights" to_op="Select by Weights (5)" to_port="weights"/>
-          <connect from_op="Weight by Gini Index (5)" from_port="example set" to_op="Select by Weights (5)" to_port="example set input"/>
+          <connect from_op="Weight by SVM (5)" from_port="weights" to_op="Select by Weights (5)" to_port="weights"/>
+          <connect from_op="Weight by SVM (5)" from_port="example set" to_op="Select by Weights (5)" to_port="example set input"/>
           <connect from_op="Select by Weights (5)" from_port="example set output" to_op="Optimize Parameters (Grid) (2)" to_port="input 1"/>
           <connect from_op="Optimize Parameters (Grid) (2)" from_port="performance" to_port="out 1"/>
           <connect from_op="Optimize Parameters (Grid) (2)" from_port="model" to_op="Apply Model (5)" to_port="model"/>
