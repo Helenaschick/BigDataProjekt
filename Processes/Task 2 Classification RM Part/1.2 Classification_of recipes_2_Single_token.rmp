@@ -126,7 +126,7 @@
       </operator>
       <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Trainings Data" width="90" x="380" y="136"/>
       <operator activated="true" class="multiply" compatibility="9.10.008" expanded="true" height="82" name="Test Data" width="90" x="380" y="238"/>
-      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Random Forest (2)" width="90" x="715" y="697">
+      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Random Forest (2)" width="90" x="715" y="697">
         <process expanded="true">
           <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro. (5)" width="90" x="179" y="34">
             <process expanded="true">
@@ -157,7 +157,7 @@
                 <parameter key="weight_relation" value="top p%"/>
                 <parameter key="weight" value="1.0"/>
                 <parameter key="k" value="10"/>
-                <parameter key="p" value="0.2"/>
+                <parameter key="p" value="0.5"/>
                 <parameter key="deselect_unknown" value="true"/>
                 <parameter key="use_absolute_weights" value="true"/>
               </operator>
@@ -1121,7 +1121,7 @@
           <portSpacing port="sink_out 4" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Gradient Boosted Tree" width="90" x="715" y="850">
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="124" name="Gradient Boosted Tree" width="90" x="715" y="850">
         <process expanded="true">
           <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="82" name="Data Prepro. (6)" width="90" x="179" y="34">
             <process expanded="true">
@@ -1335,17 +1335,18 @@
       <connect from_op="Retrieve 2 grams" from_port="output" to_op="Data Prep 1" to_port="in 1"/>
       <connect from_op="Data Prep 1" from_port="out 1" to_op="Trainings Data" to_port="input"/>
       <connect from_op="Data Prep 1" from_port="out 2" to_op="Test Data" to_port="input"/>
-      <connect from_op="Trainings Data" from_port="output 1" to_op="Gradient Boosted Tree" to_port="in 1"/>
-      <connect from_op="Test Data" from_port="output 1" to_op="Gradient Boosted Tree" to_port="in 2"/>
-      <connect from_op="Gradient Boosted Tree" from_port="out 1" to_port="result 1"/>
-      <connect from_op="Gradient Boosted Tree" from_port="out 2" to_port="result 2"/>
-      <connect from_op="Gradient Boosted Tree" from_port="out 3" to_port="result 3"/>
+      <connect from_op="Trainings Data" from_port="output 1" to_op="Random Forest (2)" to_port="in 1"/>
+      <connect from_op="Test Data" from_port="output 1" to_op="Random Forest (2)" to_port="in 2"/>
+      <connect from_op="Random Forest (2)" from_port="out 1" to_port="result 1"/>
+      <connect from_op="Random Forest (2)" from_port="out 2" to_port="result 2"/>
+      <connect from_op="Random Forest (2)" from_port="out 3" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
       <portSpacing port="sink_result 3" spacing="0"/>
       <portSpacing port="sink_result 4" spacing="0"/>
       <description align="center" color="yellow" colored="false" height="67" resized="false" width="126" x="31" y="252">Retrieve Exa_2_Single_token Data</description>
+      <description align="center" color="yellow" colored="false" height="104" resized="false" width="180" x="518" y="803">Zur Info:&lt;br/&gt;Random Forest und Gradient Boosted Tree laufen beide &amp;#252;ber 5 Stunden</description>
     </process>
   </operator>
 </process>
