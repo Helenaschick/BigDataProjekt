@@ -60,7 +60,7 @@
       <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (11)" width="90" x="849" y="850"/>
       <operator activated="true" class="union" compatibility="9.10.008" expanded="true" height="82" name="Union (7)" width="90" x="1117" y="697"/>
       <operator activated="true" class="write_excel" compatibility="9.10.008" expanded="true" height="103" name="Write Excel" width="90" x="1117" y="544">
-        <parameter key="excel_file" value="/Volumes/GoogleDrive/.shortcut-targets-by-id/1Rnp5v40n7RDKtUJBi_66xjeainmGeqF3/Project - BI- and Big-Data-Design Workshop/Task 2_Dashboard/Classification_results.xlsx"/>
+        <parameter key="excel_file" value="/Volumes/GoogleDrive/.shortcut-targets-by-id/1Rnp5v40n7RDKtUJBi_66xjeainmGeqF3/Project - BI- and Big-Data-Design Workshop/Task 2_Dashboard/Classification_results_from_Rapidminer.xlsx"/>
         <parameter key="file_format" value="xlsx"/>
         <enumeration key="sheet_names"/>
         <parameter key="sheet_name" value="RapidMiner Data"/>
